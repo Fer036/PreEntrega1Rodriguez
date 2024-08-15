@@ -48,8 +48,62 @@ npm run eject
 >> Es una extensión de JS recomendada para trabajar en react. 
 
 <!-- ///////////////////////////////////////////////////// -->
-## CODEANDO: 
 
+>> CODEANDO: 
+```sh
+const App = () => {
+    /* -------------------------------------------- */
+    // Aplicar estilos desde el códgigo JSX.
+    const isBlue = true;
+    const myStyle = {
+        color: isBlue ? 'blue' : 'red',
+        backgroundColor: 'red',
+        fontSize: '2rem'
+    }
+
+    return(
+        // <div className='my-class'> Hola mundo!</div>
+        // <div style={{backgroundColor: 'red', fontSize: '2rem'}}>Hola mundo2!</div>
+        <div style={myStyle}>
+            Hola mundo3!
+        </div>
+    )
+    /* -------------------------------------------- */
+};
+```
 
 <!-- ///////////////////////////////////////////////////// -->
 <!-- ///////////////////////////////////////////////////// -->
+
+# CLASE 04: 
+## Componentes:
+>> Es una porción de código.
+>> Única responsabilidad (hace una sola cosa).
+>> Los componentes deben tener el nombre con la primera letra en mayúscula.
+
+## Chakra: 
+>> Templates: facilitan el código con plantillas ya creadas. 
+>> Geting started: importar en App.jsx para que funcione el proveedor de Chakra. (Provee datos).
+
+>> Importar cada componente a App.jsx
+
+<!-- ///////////////////////////////////////////////////// -->
+
+## Estados: 
+>> Valor del componente. 
+>> Se crea con hooks.
+
+### Los hooks:
+>> son funciones ya definidas por react que permiten manipular ciertas acciones, como el estado del componente. 
+
+```sh
+>> useState: Permite crear un estado en un componente funcional.
+```
+1. Se deine la variable. 
+2. [variable, parámetro]
+3. sintaxis: 
+```sh
+    const [count, setCount] = useState(0);
+```
+<!-- ///////////////////////////////////////////////////// -->
+

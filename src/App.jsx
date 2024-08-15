@@ -1,23 +1,13 @@
-import './App.css'
+import './App.css';
+import { ChakraProvider } from '@chakra-ui/react';
+import Navbar from './components/Navbar/Navbar';
 
-const App = () => {
-    /* -------------------------------------------- */
-    // Aplicar estilos desde el códgigo JSX.
-    const isBlue = true;
-    const myStyle = {
-        color: isBlue ? 'blue' : 'red',
-        backgroundColor: 'red',
-        fontSize: '2rem'
-    }
-
-    return(
-        // <div className='my-class'> Hola mundo!</div>
-        // <div style={{backgroundColor: 'red', fontSize: '2rem'}}>Hola mundo2!</div>
-        <div style={myStyle}>
-            Hola mundo3!
-        </div>
+function App() {
+    return (
+        <ChakraProvider>
+            <Navbar/> 
+        </ChakraProvider>
     )
-    /* -------------------------------------------- */
 };
 
 export default App; 
