@@ -1,73 +1,115 @@
 import {
     Box,
     Flex,
-    Avatar,
     Button,
-    Menu,
-    MenuButton,
-    MenuList,
-    MenuItem,
-    MenuDivider,
     useColorModeValue,
     Stack,
     useColorMode,
-    Center,
-} from "@chakra-ui/react";
-import { MoonIcon, SunIcon } from "@chakra-ui/icons";
+    HStack,
+    IconButton,
+    useDisclosure,
+    Drawer,
+    DrawerBody,
+    DrawerFooter,
+    DrawerHeader,
+    DrawerOverlay,
+    DrawerContent,
+    DrawerCloseButton,
+} from '@chakra-ui/react';
 
-const Navbar = () => {
-    const { colorMode, toggleColorMode } = useColorMode();
+import { MoonIcon, SunIcon, HamburgerIcon } from '@chakra-ui/icons';
+import myLogo2 from '/src/assets/img/myLogo2.png';
+import CartWidget from '/src/components/CartWidget/CartWidget';
 
+const Links = ['Inicio', 'Productos', 'Contacto'];
+
+const NavLink = ({ children }) => {
     return (
-        <>
-            <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
-                <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-                    <Box>Logo</Box>
-
-                    <Flex alignItems={"center"}>
-                        <Stack direction={"row"} spacing={7}>
-                            <Button onClick={toggleColorMode}>
-                                {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
-                            </Button>
-
-                            <Menu>
-                                <MenuButton
-                                    as={Button}
-                                    rounded={"full"}
-                                    variant={"link"}
-                                    cursor={"pointer"}
-                                    minW={0}
-                                >
-                                    <Avatar
-                                        size={"sm"}
-                                        src={"https://avatars.dicebear.com/api/male/username.svg"}
-                                    />
-                                </MenuButton>
-                                <MenuList alignItems={"center"}>
-                                    <br />
-                                    <Center>
-                                        <Avatar
-                                            size={"2xl"}
-                                            src={"https://avatars.dicebear.com/api/male/username.svg"}
-                                        />
-                                    </Center>
-                                    <br />
-                                    <Center>
-                                        <p>Username</p>
-                                    </Center>
-                                    <br />
-                                    <MenuDivider />
-                                    <MenuItem>Your Servers</MenuItem>
-                                    <MenuItem>Account Settings</MenuItem>
-                                    <MenuItem>Logout</MenuItem>
-                                </MenuList>
-                            </Menu>
-                        </Stack>
-                    </Flex>
-                </Flex>
-            </Box>
-        </>
+        <Box
+            as="a"
+            px={3}
+            py={3}
+            rounded={'md'}
+            _hover={{
+                textDecoration: 'none',
+                bg: useColorModeValue('gray.200', 'gray.700'),
+            }}
+            href={'#'}>
+            {children}
+        </Box>
     );
 };
 
-export default Navbar;
+const NavBar = () => {
+    const { colorMode, toggleColorMode } = useColorMode();
+    const { isOpen, onOpen, onClose } = useDisclosure();
+
+    return (
+        <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
+            <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
+                {/* Logo */}
+                <Box>
+                    <img width={'250px'} src={myLogo2} alt="logo" />
+                </Box>
+
+                {/* Secciones */}
+                <Flex display={{ base: 'none', md: 'flex' }} flex={1} justifyContent={'center'}>
+                    <HStack as={'nav'} spacing={4} alignItems={'center'}>
+                        {Links.map((link) => (
+                            <NavLink key={link}>{link}</NavLink>
+                        ))}
+                    </HStack>
+                </Flex>
+
+                {/* Icono cartwidget y botón modo oscuro y claro */}
+                <Flex alignItems={'center'} ml={4} display={{ base: 'none', md: 'flex' }}>
+                    <Button onClick={toggleColorMode}>
+                        {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+                    </Button>
+                    <Box ml={4}>
+                        <CartWidget />
+                    </Box>
+                </Flex>
+
+                {/* Menú hamburguesa para pantalla sm */}
+                <Flex alignItems={'center'} display={{ base: 'flex', md: 'none' }}>
+                    <IconButton
+                        size={'md'}
+                        icon={<HamburgerIcon />}
+                        aria-label={'Open Menu'}
+                        onClick={onOpen}
+                    />
+                    <Box ml={4}>
+                        <CartWidget />
+                    </Box>
+                    <Drawer
+                        isOpen={isOpen}
+                        placement="left"
+                        onClose={onClose}
+                    >
+                        <DrawerOverlay />
+                        <DrawerContent>
+                            <DrawerCloseButton />
+                            <DrawerHeader>Menú</DrawerHeader>
+
+                            <DrawerBody>
+                                <Stack direction={'column'} spacing={4}>
+                                    {Links.map((link) => (
+                                        <NavLink key={link}>{link}</NavLink>
+                                    ))}
+                                </Stack>
+                            </DrawerBody>
+                            <DrawerFooter>
+                                <Button onClick={toggleColorMode} width='full'>
+                                    {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+                                </Button>
+                            </DrawerFooter>
+                        </DrawerContent>
+                    </Drawer>
+                </Flex>
+            </Flex>
+        </Box>
+    );
+};
+
+export default NavBar;
