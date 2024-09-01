@@ -19,7 +19,7 @@ import {
 
 import { MoonIcon, SunIcon, HamburgerIcon } from '@chakra-ui/icons';
 import myLogo2 from '/src/assets/img/myLogo2.png';
-import CartWidget from '/src/components/CartWidget/CartWidget';
+import { CartWidget } from '../index';
 
 const Links = ['Inicio', 'Productos', 'Contacto'];
 
@@ -40,7 +40,7 @@ const NavLink = ({ children }) => {
     );
 };
 
-const NavBar = () => {
+export const NavBar = () => {
     const { colorMode, toggleColorMode } = useColorMode();
     const { isOpen, onOpen, onClose } = useDisclosure();
 

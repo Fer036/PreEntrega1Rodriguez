@@ -1,7 +1,7 @@
 import { Box, Icon, Text } from '@chakra-ui/react';
 import { FaShoppingCart } from 'react-icons/fa';
 
-const CartWidget = () => {
+export const CartWidget = () => {
     return (
         <Box position='relative' display='inline-block' ml={4}>
             <Icon as={FaShoppingCart} w={5} h={5} />
