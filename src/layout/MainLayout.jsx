@@ -1,11 +1,11 @@
 import { useRef } from "react";
-import { NavBar } from "../components";
+import { Navbar } from "../components";
 
 
 export const MainLayout = ({ children }) => {
     return (
         <div>
-            <NavBar />
+            <Navbar />
             { children }
         </div>
     );

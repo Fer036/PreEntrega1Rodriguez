@@ -40,7 +40,7 @@ const NavLink = ({ children }) => {
     );
 };
 
-export const NavBar = () => {
+export const Navbar = () => {
     const { colorMode, toggleColorMode } = useColorMode();
     const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -112,4 +112,4 @@ export const NavBar = () => {
     );
 };
 
-export default NavBar;
+export default Navbar;
