@@ -1,4 +1,4 @@
-export * from './NavBar';
+export * from './Navbar';
 export * from './ButtonComponent';
 export * from './CartWidget';
 export * from './ItemListContainer';
