@@ -1,7 +1,7 @@
-export const ProductsData = [
+export const products = [
     {
         id: 1,
-        category: 'PC armada',
+        category: 'PC',
         name: 'PC Gamer Ryzen 5',
         price: '$956.000',
         description: 'PC gamer | Ryzen 5 5600 | TGraf. RX 560 | 16gb | 512gb',
@@ -10,7 +10,7 @@ export const ProductsData = [
 
     {
         id: 2,
-        category: 'PC armada',
+        category: 'PC',
         name: 'PC Gamer Ryzen 7',
         price: '$3.895.590',
         description: 'PC gamer | Ryzen 7 5700x | TGraf. RX 6800 | 32gb | 1tb',
@@ -19,7 +19,7 @@ export const ProductsData = [
 
     {
         id: 3,
-        category: 'PC armada',
+        category: 'PC',
         name: 'PC Gamer Ryzen 9',
         price: '$8.970.760',
         description: 'PC gamer | Ryzen 7 5700x | TGraf. Asus RTX 4090 | 32gb | 1tb gen4 | WaterCooler Asus',
@@ -28,7 +28,7 @@ export const ProductsData = [
 
     {
         id: 4,
-        category: 'Silla Gamer',
+        category: 'SillaGamer',
         name: 'Redragon Gaia',
         price: '$297.000',
         description: 'Hasta 150kg, ByN',
@@ -37,7 +37,7 @@ export const ProductsData = [
 
     {
         id: 5,
-        category: 'Periféricos',
+        category: 'Perifericos',
         name: 'Mouse Logitech Lift',
         price: '$56.043',
         description: 'Vertical | Rueda scroll premium',
@@ -46,7 +46,7 @@ export const ProductsData = [
 
     {
         id: 6,
-        category: 'Periféricos',
+        category: 'Perifericos',
         name: 'Teclado Redragon k530',
         price: '$82.450',
         description: 'Mecánico | 60% | Inalámbrico',
@@ -55,7 +55,7 @@ export const ProductsData = [
 
     {
         id: 7,
-        category: 'Periféricos',
+        category: 'Perifericos',
         name: 'Micófono Logitech Yeti',
         price: '$226.970',
         description: 'USB | Dinámico | Supercardioide',
@@ -64,8 +64,8 @@ export const ProductsData = [
 
     {
         id: 8,
-        category: 'Periféricos',
-        name: 'WebCam Logitech MX Brio',
+        category: 'Perifericos',
+        name: 'WebCam Logitech Brio',
         price: '$143.090',
         description: 'UltraHD 4k',
         image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSe-Ip5WbS7KL5Ez6j_t-nTau6R2czraUmAxA&s',
@@ -73,19 +73,19 @@ export const ProductsData = [
 
     {
         id: 9,
-        category: 'Periféricos',
-        name: 'Auricular Logitech Zone Vibe 100',
+        category: 'Perifericos',
+        name: 'Auricular Logitech',
         price: '$187.890',
-        description: 'Inalámbrico | Micrófono',
+        description: 'Inalámbrico | Micrófono | ZoneVibe100',
         image: 'https://m.media-amazon.com/images/S/aplus-media-library-service-media/ce613208-3b8b-4710-a28f-ccdb418c2fa8.__CR0,0,600,450_PT0_SX600_V1___.jpg',
     },
 
     {
         id: 28,
-        category: 'Periféricos',
-        name: 'Monitor Gigabyte 27 Edge" ',
+        category: 'Perifericos',
+        name: 'Monitor Gigabyte Edge',
         price: '$347.800',
-        description: 'Curvo | 180hz | FullHD',
+        description: 'Curvo 27" | 180hz | FullHD',
         image: 'https://cdn.mos.cms.futurecdn.net/EaoHEVTxhDUL7UkkDXRPSV-480-80.jpg',
     },
 
@@ -156,7 +156,7 @@ export const ProductsData = [
         id: 17,
         category: 'Coleccionables',
         name: 'Stormtrooper',
-        price: '476.800',
+        price: '$476.800',
         description: 'Casco | Talla única',
         image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQT9jpQJX7d-3d1133Nu0fI1fgQe4WZ7wIQw&s',
     },
@@ -213,5 +213,5 @@ export const ProductsData = [
         price: '$33.400',
         description: 'Cuadro Gameboy desarmado',
         image: 'https://i.etsystatic.com/26830312/r/il/384f51/3282045585/il_1080xN.3282045585_1vkz.jpg',
-    },
+    }
 ];

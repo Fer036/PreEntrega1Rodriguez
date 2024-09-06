@@ -1,3 +1,4 @@
+import React from 'react';
 import {
     Box,
     Flex,
@@ -15,101 +16,144 @@ import {
     DrawerOverlay,
     DrawerContent,
     DrawerCloseButton,
+    Menu,
+    MenuButton,
+    MenuList,
+    MenuItem
 } from '@chakra-ui/react';
-
 import { MoonIcon, SunIcon, HamburgerIcon } from '@chakra-ui/icons';
 import myLogo2 from '/src/assets/img/myLogo2.png';
 import { CartWidget } from '../index';
-
-const Links = ['Inicio', 'Productos', 'Contacto'];
-
-const NavLink = ({ children }) => {
-    return (
-        <Box
-            as="a"
-            px={3}
-            py={3}
-            rounded={'md'}
-            _hover={{
-                textDecoration: 'none',
-                bg: useColorModeValue('gray.200', 'gray.700'),
-            }}
-            href={'#'}>
-            {children}
-        </Box>
-    );
-};
+import { Link } from 'react-router-dom';
 
 export const Navbar = () => {
     const { colorMode, toggleColorMode } = useColorMode();
+    
+    const menuOptions = [
+        { id: 1, label: 'Inicio', path: '/' },
+        { id: 2, label: 'Productos', path: '/category' },
+        { id: 3, label: 'Contacto', path: '/contact' },
+    ];
+
+    const productOptions = [
+        { id: 4, label: 'Coleccionables', path: '/category/:id' },
+        { id: 5, label: 'Periféricos', path: '/category/:id' },
+        { id: 6, label: 'Sillas Gamer', path: '/category/:id' },
+        { id: 7, label: 'PC armadas', path: '/category/:id' },
+    ];
+
     const { isOpen, onOpen, onClose } = useDisclosure();
+    
+    const boxShadowStyle = {
+        boxShadow: '0px 8px 8px -8px rgba(71,70,70,1)',
+        WebkitBoxShadow: '0px 8px 8px -8px rgba(71,70,70,1)',
+        MozBoxShadow: '0px 8px 8px -8px rgba(71,70,70,1)'
+    }
 
     return (
-        <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
-            <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
-                {/* Logo */}
-                <Box>
-                    <img width={'250px'} src={myLogo2} alt="logo" />
-                </Box>
-
-                {/* Secciones */}
-                <Flex display={{ base: 'none', md: 'flex' }} flex={1} justifyContent={'center'}>
-                    <HStack as={'nav'} spacing={4} alignItems={'center'}>
-                        {Links.map((link) => (
-                            <NavLink key={link}>{link}</NavLink>
-                        ))}
-                    </HStack>
-                </Flex>
-
-                {/* Icono cartwidget y botón modo oscuro y claro */}
-                <Flex alignItems={'center'} ml={4} display={{ base: 'none', md: 'flex' }}>
-                    <Button onClick={toggleColorMode}>
-                        {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
-                    </Button>
-                    <Box ml={4}>
-                        <CartWidget />
+        <>
+            <Box bg={useColorModeValue('blue.800', 'gray.900')} px={4} style={boxShadowStyle}>
+                <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
+                    {/* Logo */}
+                    <Box>
+                        <img width={'250px'} src={myLogo2} alt="logo" />
                     </Box>
-                </Flex>
 
-                {/* Menú hamburguesa para pantalla sm */}
-                <Flex alignItems={'center'} display={{ base: 'flex', md: 'none' }}>
-                    <IconButton
-                        size={'md'}
-                        icon={<HamburgerIcon />}
-                        aria-label={'Open Menu'}
-                        onClick={onOpen}
-                    />
-                    <Box ml={4}>
-                        <CartWidget />
-                    </Box>
-                    <Drawer
-                        isOpen={isOpen}
-                        placement="left"
-                        onClose={onClose}
-                    >
-                        <DrawerOverlay />
-                        <DrawerContent>
-                            <DrawerCloseButton />
-                            <DrawerHeader>Menú</DrawerHeader>
+                    {/* Secciones */}
+                    <Flex display={{ base: 'none', md: 'flex' }} flex={1} justifyContent={'center'} color={'white'}>
+                        <HStack as={'nav'} spacing={4} alignItems={'center'}>
+                            {menuOptions.map((option) => (
+                                option.label === 'Productos' ? (
+                                    <Menu key={option.id} isLazy>
+                                        <MenuButton
+                                            as={Button}
+                                            variant="link"
+                                            color="white"
+                                        >
+                                            {option.label}
+                                        </MenuButton>
+                                        <MenuList>
+                                            {productOptions.map((prodOption) => (
+                                                <MenuItem key={prodOption.id} as={Link} to={prodOption.path}>
+                                                    {prodOption.label}
+                                                </MenuItem>
+                                            ))}
+                                        </MenuList>
+                                    </Menu>
+                                ) : (
+                                    <Link key={option.id} to={option.path}>
+                                        <Button variant="link" color="white">{option.label}</Button>
+                                    </Link>
+                                )
+                            ))}
+                        </HStack>
+                    </Flex>
 
-                            <DrawerBody>
-                                <Stack direction={'column'} spacing={4}>
-                                    {Links.map((link) => (
-                                        <NavLink key={link}>{link}</NavLink>
-                                    ))}
-                                </Stack>
-                            </DrawerBody>
-                            <DrawerFooter>
-                                <Button onClick={toggleColorMode} width='full'>
-                                    {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
-                                </Button>
-                            </DrawerFooter>
-                        </DrawerContent>
-                    </Drawer>
+                    {/* Icono cartwidget y botón modo oscuro y claro */}
+                    <Flex alignItems={'center'} ml={4} display={{ base: 'none', md: 'flex' }}>
+                        <Button onClick={toggleColorMode}>
+                            {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+                        </Button>
+                        <Box ml={4} color={'white'}>
+                            <CartWidget />
+                        </Box>
+                    </Flex>
+
+                    {/* Menú hamburguesa para pantalla sm */}
+                    <Flex alignItems={'center'} display={{ base: 'flex', md: 'none' }}>
+                        <IconButton
+                            size={'md'}
+                            icon={<HamburgerIcon />}
+                            aria-label={'Open Menu'}
+                            onClick={onOpen}
+                        />
+                        <Box ml={4}>
+                            <CartWidget />
+                        </Box>
+                        <Drawer
+                            isOpen={isOpen}
+                            placement="left"
+                            onClose={onClose}
+                        >
+                            <DrawerOverlay />
+                            <DrawerContent>
+                                <DrawerCloseButton />
+                                <DrawerHeader>Menú</DrawerHeader>
+
+                                <DrawerBody>
+                                    <Stack direction={'column'} spacing={4}>
+                                        {menuOptions.map((option) => (
+                                            option.label === 'Productos' ? (
+                                                <Menu key={option.id} isLazy>
+                                                    <MenuButton as={Button} variant="link" width="full">
+                                                        {option.label}
+                                                    </MenuButton>
+                                                    <MenuList>
+                                                        {productOptions.map((prodOption) => (
+                                                            <MenuItem key={prodOption.id} as={Link} to={prodOption.path}>
+                                                                {prodOption.label}
+                                                            </MenuItem>
+                                                        ))}
+                                                    </MenuList>
+                                                </Menu>
+                                            ) : (
+                                                <Link key={option.id} to={option.path}>
+                                                    <Button width="full" variant="link">{option.label}</Button>
+                                                </Link>
+                                            )
+                                        ))}
+                                    </Stack>
+                                </DrawerBody>
+                                <DrawerFooter>
+                                    <Button onClick={toggleColorMode} width='full'>
+                                        {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+                                    </Button>
+                                </DrawerFooter>
+                            </DrawerContent>
+                        </Drawer>
+                    </Flex>
                 </Flex>
-            </Flex>
-        </Box>
+            </Box>
+        </>
     );
 };
-
-export default Navbar;

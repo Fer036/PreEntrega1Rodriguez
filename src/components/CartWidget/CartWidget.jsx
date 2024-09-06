@@ -20,5 +20,3 @@ export const CartWidget = () => {
         </Box>
     )
 };
-
-export default CartWidget;

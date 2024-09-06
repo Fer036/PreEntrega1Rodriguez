@@ -10,14 +10,24 @@ import {
     ButtonGroup,
     Button,
 } from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
 
 export const ItemListContainer = ({ products }) => {
     return (
         <Box display={'flex'} flexWrap={'wrap'} justifyContent={'center'}>
-            {products.map((product, index) => (
+            {products.map((product) => (
                 <Card key={product.id} w={'15rem'} h={'25rem'} margin={'1rem'}>
                     <CardBody h={'20rem'}>
-                        <Image src={product.image} alt={product.name} borderRadius={'lg'} w={'10rem'} h={'10rem'} objectFit={'cover'} m={'auto'} />
+                        <Image 
+                            src={product.image} 
+                            alt={product.name} 
+                            borderRadius={'lg'} 
+                            w={'10rem'} 
+                            h={'10rem'} 
+                            objectFit={'cover'} 
+                            m={'auto'} 
+                        />
+                        
                         <Stack mt={3} spacing={1}>
                             <Heading size={'sm'}>
                                 {product.name}
@@ -45,17 +55,12 @@ export const ItemListContainer = ({ products }) => {
                                     bg: 'orange.700',
                                 }}
                             >
-                                Buy
-                            </Button>
-                            <Button variant={'ghost'} colorScheme='blue'>
-                                Añadir
+                                <Link to={`/item/${product.id}`}>Detalle</Link>
                             </Button>
                         </ButtonGroup>
                     </CardFooter>
                 </Card>
             ))}
         </Box>
-    )
-}
-
-export default ItemListContainer;
+    );
+};

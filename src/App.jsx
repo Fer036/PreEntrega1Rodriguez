@@ -3,17 +3,17 @@ import React from 'react';
 import { ChakraProvider } from '@chakra-ui/react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { ProductsData } from './data/productData';
-import { ItemListContainer, MainLayout } from './components';
+import { MainRouter } from './routes';
+import MainLayout from './layout/MainLayout';
 
 function App() {
     return (
         <ChakraProvider>
                 <MainLayout>
-                    <ItemListContainer products={ProductsData} />
+                    <MainRouter />
                 </MainLayout>
         </ChakraProvider>
-    )
+    );
 };
     
 export default App; 
