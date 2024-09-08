@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "netlify-dev": "netlify dev",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
@@ -38,6 +39,6 @@
   },
   "description": "1. E-COMMERCE: GeekStore - tienda de setups y cómics.\r 2. Componente NavBar - con theme color, logo y secciones - // y componente CartWidget - con un ícono carrito y notificación con número hardcodeado -.\r 3. ItemListContainer con prop greeting.",
   "main": "vite.config.js",
-  "author": "",
+  "author": "María Rodríguez",
   "license": "ISC"
 }
