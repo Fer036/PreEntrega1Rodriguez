@@ -219,6 +219,10 @@ exports.handler = async function (event, context) {
 
     return {
         statusCode: 200,
+        headers: {
+            'Access-Control-Allow-Origin': '*',  // Permite cualquier origen
+            'Access-Control-Allow-Headers': 'Content-Type', // Opcional, permite ciertos encabezados
+        },
         body: JSON.stringify(products)
     };
 };
