@@ -36,10 +36,10 @@ export const Navbar = () => {
     ];
 
     const productOptions = [
-        { id: 4, label: 'Coleccionables', path: '/category/:id' },
-        { id: 5, label: 'Periféricos', path: '/category/:id' },
-        { id: 6, label: 'Sillas Gamer', path: '/category/:id' },
-        { id: 7, label: 'PC armadas', path: '/category/:id' },
+        { id: 4, label: 'Coleccionables', path: '/category/:categoryId' },
+        { id: 5, label: 'Periféricos', path: '/category/:categoryId' },
+        { id: 6, label: 'Sillas Gamer', path: '/category/:categoryId' },
+        { id: 7, label: 'PC armadas', path: '/category/:categoryId' },
     ];
 
     const { isOpen, onOpen, onClose } = useDisclosure();

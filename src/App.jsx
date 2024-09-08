@@ -4,16 +4,13 @@ import { ChakraProvider } from '@chakra-ui/react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { MainRouter } from './routes';
-import MainLayout from './layout/MainLayout';
 
 function App() {
     return (
         <ChakraProvider>
-                <MainLayout>
-                    <MainRouter />
-                </MainLayout>
+            <MainRouter />
         </ChakraProvider>
     );
 };
-    
+
 export default App; 

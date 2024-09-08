@@ -14,7 +14,7 @@ import {
     useColorModeValue,
 } from '@chakra-ui/react';
 
-export const ItemDetailContainer = ({ product }) => {
+export const ItemDetailContainer = ({ products }) => {
     const [showCount, setShowCount] = useState(false);
     const [count, setCount] = useState(0);
 
@@ -47,8 +47,8 @@ export const ItemDetailContainer = ({ product }) => {
                 <Flex justifyContent={{base: 'center', lg: 'end'}}>
                     <Image
                         rounded={'md'}
-                        alt={'product image'}
-                        src={product.image}
+                        alt={'products image'}
+                        src={products.image}
                         fit={'cover'}
                         w={{base: '80%'}}
                         h={{base: '100%'}}
@@ -61,14 +61,14 @@ export const ItemDetailContainer = ({ product }) => {
                             fontWeight={600}
                             fontSize={{base: '2x1', sm: '4x1', lg: '5x1'}}
                         >
-                            {product.name}
+                            {products.name}
                         </Heading>
                         <Text
                             color={useColorModeValue('blue.500', 'orange.500')}
                             fontWeight={600}
                             fontSize={'2rem'}
                         >
-                            {product.price}
+                            {products.price}
                         </Text>
                     </Box>
 
@@ -87,7 +87,7 @@ export const ItemDetailContainer = ({ product }) => {
                                 fontWeight={'300'}
                                 textTransform={'uppercase'}
                             >
-                                {product.description}
+                                {products.description}
                             </Text>
                         </VStack>
                     </Stack>

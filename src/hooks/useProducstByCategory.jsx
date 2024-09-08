@@ -1,26 +1,19 @@
-import { useEffect, useState } from "react";
-import { products } from '../services/products';
+import React from "react";
+import { getProductsByCategory } from '../services/products.service';
 
-export const useProductsByCategory = (category) => {
-    const [ productsData, setProductsData ] = useState([]);
-    const [ loading, setLoading ] = useState(true);
-    const [ error, setError ] = useState(null);
+export const useProductsByCategory = (id) => {
+    const [products, setProducts] = React.useState([]);
 
-    useEffect(() => {
-        const getProductsByCategory = () => {
-            const filteredProducts = products.filter(product => product.category.toLowerCase() === category);
-
-            if(filteredProducts.length > 0) {
-                setProductsData(filteredProducts);
-                setError(null);
-            } else {
-                setProductsData([]);
-                setError('Categoría inexistente');
-            };
-
-            setLoading(false);
-        };
+    React.useEffect(() => {
+        getProductsByCategory(id)
+            .then((res) => {
+                console.log(res);
+                setProducts(response.data.products);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     }, []);
 
-    return { productsData, loading, error };
+    return { products };
 };

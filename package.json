@@ -12,11 +12,12 @@
   "dependencies": {
     "@chakra-ui/icons": "^2.1.1",
     "@chakra-ui/react": "^2.8.2",
-    "@emotion/react": "^11.13.0",
+    "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
-    "axios": "^1.7.5",
+    "axios": "^1.7.7",
     "bootstrap": "^5.3.3",
-    "framer-motion": "^11.3.27",
+    "cors": "^2.8.5",
+    "framer-motion": "^11.5.4",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.4",
     "react-dom": "^18.3.1",
@@ -34,5 +35,9 @@
     "eslint-plugin-react-refresh": "^0.4.9",
     "globals": "^15.9.0",
     "vite": "^5.4.0"
-  }
+  },
+  "description": "1. E-COMMERCE: GeekStore - tienda de setups y cómics.\r 2. Componente NavBar - con theme color, logo y secciones - // y componente CartWidget - con un ícono carrito y notificación con número hardcodeado -.\r 3. ItemListContainer con prop greeting.",
+  "main": "vite.config.js",
+  "author": "",
+  "license": "ISC"
 }

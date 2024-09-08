@@ -1,9 +1,10 @@
+import React from 'react';
 import { Flex, Spinner } from '@chakra-ui/react';
-import { useProducts } from '../hooks';
+import { useProducts } from '../hooks/useProducts';
 import { ItemListContainer } from '../components';
 
 export const Home = () => {
-    const { productsData, loading } = useProducts();
+    const { products, loading } = useProducts();
     return loading ? (
         <Flex
             width={'100%'}
@@ -14,6 +15,6 @@ export const Home = () => {
             <Spinner size={'xl'} />
         </Flex>
     ) : (
-        <ItemListContainer products={productsData} />
+        <ItemListContainer products={products} />
     );
 };

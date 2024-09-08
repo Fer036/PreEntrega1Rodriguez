@@ -215,3 +215,10 @@ export const products = [
         image: 'https://i.etsystatic.com/26830312/r/il/384f51/3282045585/il_1080xN.3282045585_1vkz.jpg',
     }
 ];
+
+exports.handler = async (e, context) => {
+    return {
+        statusCode: 200, 
+        body: JSON.stringify(products),
+    };
+};
