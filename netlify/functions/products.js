@@ -1,6 +1,4 @@
-import { body } from "framer-motion/client";
-
-export async function handler(event, context) {
+exports.handler = async function (event, context) {
     const products = [
         {
             id: 0,
