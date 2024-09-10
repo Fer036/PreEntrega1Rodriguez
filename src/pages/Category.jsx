@@ -1,12 +1,13 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { ItemListContainer  } from '../components';
+import { ItemListContainer } from '../components';
 import { useProductsByCategory } from '../hooks';
-import { Flex, Spinner, Heading } from '@chakra-ui/react';
+import { Flex, Spinner } from '@chakra-ui/react';
 
 export const Category = () => {
-    const { categoryId } = useParams();
-    const { products, loading } = useProductsByCategory(categoryId);
+    const { category } = useParams();
+    const { products, loading } = useProductsByCategory(category);
+    console.log(category)
 
     return loading ? (
         <Flex
@@ -18,6 +19,6 @@ export const Category = () => {
             <Spinner size={'xl'} />
         </Flex>
     ) : (
-            <ItemListContainer product={products} />
+        <ItemListContainer products={products} />
     );
 };

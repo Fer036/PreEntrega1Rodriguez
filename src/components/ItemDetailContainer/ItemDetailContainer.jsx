@@ -14,7 +14,8 @@ import {
     useColorModeValue,
 } from '@chakra-ui/react';
 
-export const ItemDetailContainer = ({ products }) => {
+export const ItemDetailContainer = ({ product }) => {
+    console.log(product)
     const [showCount, setShowCount] = useState(false);
     const [count, setCount] = useState(0);
 
@@ -32,6 +33,10 @@ export const ItemDetailContainer = ({ products }) => {
         }
     };
 
+    if (!product) {
+        return <p>Producto no encontrado.</p>;
+    }
+
     return (
         <Container maxW={'7x1'}>
             <SimpleGrid
@@ -47,12 +52,13 @@ export const ItemDetailContainer = ({ products }) => {
                 <Flex justifyContent={{base: 'center', lg: 'end'}}>
                     <Image
                         rounded={'md'}
-                        alt={'products image'}
-                        src={products.image}
+                        alt={'product image'}
+                        src={product.image}
                         fit={'cover'}
                         w={{base: '80%'}}
                         h={{base: '100%'}}
-                    / >
+                    ></Image>
+                    
                 </Flex>
                 <Stack textAlign={{base: 'center', lg: 'start'}} spacing={{base: 2}} alignItems={{base: 'center', lg: 'start'}}>
                     <Box as={'header'}>
@@ -61,14 +67,14 @@ export const ItemDetailContainer = ({ products }) => {
                             fontWeight={600}
                             fontSize={{base: '2x1', sm: '4x1', lg: '5x1'}}
                         >
-                            {products.name}
+                            {product.name}
                         </Heading>
                         <Text
                             color={useColorModeValue('blue.500', 'orange.500')}
                             fontWeight={600}
                             fontSize={'2rem'}
                         >
-                            {products.price}
+                            {product.price}
                         </Text>
                     </Box>
 
@@ -87,7 +93,7 @@ export const ItemDetailContainer = ({ products }) => {
                                 fontWeight={'300'}
                                 textTransform={'uppercase'}
                             >
-                                {products.description}
+                                {product.description}
                             </Text>
                         </VStack>
                     </Stack>

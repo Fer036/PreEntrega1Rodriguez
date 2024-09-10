@@ -8,7 +8,7 @@ export const useProducts = () => {
     React.useEffect(() => {
         getAllProducts()
             .then((res) => {
-                setProducts(res.data.products);
+                setProducts(res.data);
             })
             .catch((err) => {
                 console.log(err);
@@ -18,3 +18,4 @@ export const useProducts = () => {
 
     return { products, loading };
 };
+

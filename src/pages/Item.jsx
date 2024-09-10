@@ -6,7 +6,7 @@ import { Flex, Spinner } from '@chakra-ui/react';
 
 export const Item = () => {
     const { id } = useParams();
-    const { product, loading } = useProductsById(Number(id));
+    const { product, loading } = useProductsById(id);
 
     return loading ? (
         <Flex

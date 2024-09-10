@@ -2,17 +2,20 @@ import React from "react";
 import { getCategories } from '../services/products.service';
 
 export const useCategory = () => {
-    const [category, setCategory] = React.useState([]);
+    const [categories, setCategories] = React.useState([]);
+    const [loading, setLoading] = React.useState(true);
 
     React.useEffect(() => {
         getCategories()
             .then((res) => {
-                setCategory(res.data);
+                console.log(res.data)
+                setCategories(res.data);
             })
             .catch((err) => {
-                console.error(err);
-            });
+                console.log(err);
+            })
+            .finally(() => setLoading(false));
     }, []);
 
-    return { category };
+    return { categories, loading };
 };

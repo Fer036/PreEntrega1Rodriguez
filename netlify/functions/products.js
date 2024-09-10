@@ -1,8 +1,10 @@
-exports.handler = async function (event, context) {
+import { body } from "framer-motion/client";
+
+export async function handler(event, context) {
     const products = [
         {
-            id: 1,
-            category: 'PC',
+            id: 0,
+            category: 'pc',
             name: 'PC Gamer Ryzen 5',
             price: '$956.000',
             description: 'PC gamer | Ryzen 5 5600 | TGraf. RX 560 | 16gb | 512gb',
@@ -10,8 +12,8 @@ exports.handler = async function (event, context) {
         },
 
         {
-            id: 2,
-            category: 'PC',
+            id: 1,
+            category: 'pc',
             name: 'PC Gamer Ryzen 7',
             price: '$3.895.590',
             description: 'PC gamer | Ryzen 7 5700x | TGraf. RX 6800 | 32gb | 1tb',
@@ -19,8 +21,8 @@ exports.handler = async function (event, context) {
         },
 
         {
-            id: 3,
-            category: 'PC',
+            id: 2,
+            category: 'pc',
             name: 'PC Gamer Ryzen 9',
             price: '$8.970.760',
             description: 'PC gamer | Ryzen 7 5700x | TGraf. Asus RTX 4090 | 32gb | 1tb gen4 | WaterCooler Asus',
@@ -28,8 +30,8 @@ exports.handler = async function (event, context) {
         },
 
         {
-            id: 4,
-            category: 'SillaGamer',
+            id: 3,
+            category: 'sillagamer',
             name: 'Redragon Gaia',
             price: '$297.000',
             description: 'Hasta 150kg, ByN',
@@ -37,8 +39,8 @@ exports.handler = async function (event, context) {
         },
 
         {
-            id: 5,
-            category: 'Perifericos',
+            id: 4,
+            category: 'perifericos',
             name: 'Mouse Logitech Lift',
             price: '$56.043',
             description: 'Vertical | Rueda scroll premium',
@@ -46,8 +48,8 @@ exports.handler = async function (event, context) {
         },
 
         {
-            id: 6,
-            category: 'Perifericos',
+            id: 5,
+            category: 'perifericos',
             name: 'Teclado Redragon k530',
             price: '$82.450',
             description: 'Mecánico | 60% | Inalámbrico',
@@ -55,8 +57,8 @@ exports.handler = async function (event, context) {
         },
 
         {
-            id: 7,
-            category: 'Perifericos',
+            id: 6,
+            category: 'perifericos',
             name: 'Micófono Logitech Yeti',
             price: '$226.970',
             description: 'USB | Dinámico | Supercardioide',
@@ -64,8 +66,8 @@ exports.handler = async function (event, context) {
         },
 
         {
-            id: 8,
-            category: 'Perifericos',
+            id: 7,
+            category: 'perifericos',
             name: 'WebCam Logitech Brio',
             price: '$143.090',
             description: 'UltraHD 4k',
@@ -73,8 +75,8 @@ exports.handler = async function (event, context) {
         },
 
         {
-            id: 9,
-            category: 'Perifericos',
+            id: 8,
+            category: 'perifericos',
             name: 'Auricular Logitech',
             price: '$187.890',
             description: 'Inalámbrico | Micrófono | ZoneVibe100',
@@ -82,8 +84,8 @@ exports.handler = async function (event, context) {
         },
 
         {
-            id: 28,
-            category: 'Perifericos',
+            id: 9,
+            category: 'perifericos',
             name: 'Monitor Gigabyte Edge',
             price: '$347.800',
             description: 'Curvo 27" | 180hz | FullHD',
@@ -92,7 +94,7 @@ exports.handler = async function (event, context) {
 
         {
             id: 10,
-            category: 'Coleccionables',
+            category: 'coleccionables',
             name: 'Figura DC Cómics',
             price: '$57.860',
             description: 'Plomo pintado a mano | 18cm | Consultar personaje',
@@ -101,7 +103,7 @@ exports.handler = async function (event, context) {
 
         {
             id: 11,
-            category: 'Coleccionables',
+            category: 'coleccionables',
             name: 'Figura MARVEL',
             price: '$76.450',
             description: 'Plomo pintado a mano | 24cm | Consultar personaje',
@@ -110,7 +112,7 @@ exports.handler = async function (event, context) {
 
         {
             id: 12,
-            category: 'Coleccionables',
+            category: 'coleccionables',
             name: 'Funko POP Batman',
             price: '$50.970',
             description: '16cm | Consultar personaje',
@@ -119,7 +121,7 @@ exports.handler = async function (event, context) {
 
         {
             id: 13,
-            category: 'Coleccionables',
+            category: 'coleccionables',
             name: 'Funko POP Superman',
             price: '$50.970',
             description: '16cm | Consultar personaje',
@@ -128,7 +130,7 @@ exports.handler = async function (event, context) {
 
         {
             id: 14,
-            category: 'Coleccionables',
+            category: 'coleccionables',
             name: 'La muerte de superman',
             price: '$154.890',
             description: 'Libro deluxe | 800 páginas',
@@ -137,7 +139,7 @@ exports.handler = async function (event, context) {
 
         {
             id: 15,
-            category: 'Coleccionables',
+            category: 'coleccionables',
             name: 'DC: héroes y villanos',
             price: '$52.860',
             description: 'Libro tapa dura | entrega 1 al 60',
@@ -146,7 +148,7 @@ exports.handler = async function (event, context) {
 
         {
             id: 16,
-            category: 'Coleccionables',
+            category: 'coleccionables',
             name: 'Delorean Volver al Futuro',
             price: '$187.690',
             description: 'Metal | Relación 1:24',
@@ -155,7 +157,7 @@ exports.handler = async function (event, context) {
 
         {
             id: 17,
-            category: 'Coleccionables',
+            category: 'coleccionables',
             name: 'Stormtrooper',
             price: '$476.800',
             description: 'Casco | Talla única',
@@ -164,7 +166,7 @@ exports.handler = async function (event, context) {
 
         {
             id: 18,
-            category: 'Coleccionables',
+            category: 'coleccionables',
             name: 'Marvel: Infinity Gauntlet',
             price: '$65.9670',
             description: 'Réplica 1:1 | Articulado',
@@ -173,7 +175,7 @@ exports.handler = async function (event, context) {
 
         {
             id: 19,
-            category: 'Coleccionables',
+            category: 'coleccionables',
             name: 'Mario Bros',
             price: '$125.620',
             description: 'Mario Bros figura',
@@ -182,7 +184,7 @@ exports.handler = async function (event, context) {
 
         {
             id: 20,
-            category: 'Coleccionables',
+            category: 'coleccionables',
             name: 'Martillo de Thor',
             price: '$378.700',
             description: 'Réplica 1:3 | Estático',
@@ -191,7 +193,7 @@ exports.handler = async function (event, context) {
 
         {
             id: 21,
-            category: 'Coleccionables',
+            category: 'coleccionables',
             name: 'Casco de Ironman',
             price: '$540.600',
             description: 'Eléctrico | Jarvis',
@@ -200,7 +202,7 @@ exports.handler = async function (event, context) {
 
         {
             id: 22,
-            category: 'Coleccionables',
+            category: 'coleccionables',
             name: 'Puños de Hulk',
             price: '$32.900',
             description: 'Plástico',
@@ -209,7 +211,7 @@ exports.handler = async function (event, context) {
 
         {
             id: 23,
-            category: 'Coleccionables',
+            category: 'coleccionables',
             name: 'Cuadro GameBoy',
             price: '$33.400',
             description: 'Cuadro Gameboy desarmado',
@@ -217,12 +219,31 @@ exports.handler = async function (event, context) {
         },
     ];
 
+    const category = event.queryStringParameters?.category || null;
+    const type = event.queryStringParameters?.type || null;
+
+    if(type === 'categories') {
+        const categories = [...new Set(products.map(product => product.category))];
+        return {
+            statusCode: 200,
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': 'Content-Type',
+            },
+            body: JSON.stringify(categories),
+        };
+    }
+
+    const filteredProducts = category
+        ? products.filter(product => product.category.toLowerCase() === category.toLowerCase())
+        : products;
+
     return {
         statusCode: 200,
         headers: {
-            'Access-Control-Allow-Origin': '*',  // Permite cualquier origen
-            'Access-Control-Allow-Headers': 'Content-Type', // Opcional, permite ciertos encabezados
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': 'Content-Type',
         },
-        body: JSON.stringify(products)
+        body: JSON.stringify(filteredProducts),
     };
-};
+}

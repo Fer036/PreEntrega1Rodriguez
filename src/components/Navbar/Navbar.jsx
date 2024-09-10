@@ -25,25 +25,19 @@ import { MoonIcon, SunIcon, HamburgerIcon } from '@chakra-ui/icons';
 import myLogo2 from '/src/assets/img/myLogo2.png';
 import { CartWidget } from '../index';
 import { Link } from 'react-router-dom';
+import { useCategory } from '../../hooks';
 
 export const Navbar = () => {
     const { colorMode, toggleColorMode } = useColorMode();
-    
+    const { categories, loading } = useCategory(); 
+    const { isOpen, onOpen, onClose } = useDisclosure();
+
     const menuOptions = [
         { id: 1, label: 'Inicio', path: '/' },
-        { id: 2, label: 'Productos', path: '/category' },
+        { id: 2, label: 'Productos', path: '/products' },
         { id: 3, label: 'Contacto', path: '/contact' },
     ];
 
-    const productOptions = [
-        { id: 4, label: 'Coleccionables', path: '/category/:categoryId' },
-        { id: 5, label: 'Periféricos', path: '/category/:categoryId' },
-        { id: 6, label: 'Sillas Gamer', path: '/category/:categoryId' },
-        { id: 7, label: 'PC armadas', path: '/category/:categoryId' },
-    ];
-
-    const { isOpen, onOpen, onClose } = useDisclosure();
-    
     const boxShadowStyle = {
         boxShadow: '0px 8px 8px -8px rgba(71,70,70,1)',
         WebkitBoxShadow: '0px 8px 8px -8px rgba(71,70,70,1)',
@@ -73,11 +67,15 @@ export const Navbar = () => {
                                             {option.label}
                                         </MenuButton>
                                         <MenuList>
-                                            {productOptions.map((prodOption) => (
-                                                <MenuItem key={prodOption.id} as={Link} to={prodOption.path}>
-                                                    {prodOption.label}
-                                                </MenuItem>
-                                            ))}
+                                            {loading ? (
+                                                <MenuItem>Cargando...</MenuItem>
+                                            ) : (
+                                                categories.map((category) => (
+                                                    <MenuItem key={category}>
+                                                        <Link to={`/category/${category}`}>{category}</Link>
+                                                    </MenuItem>
+                                                ))
+                                            )}
                                         </MenuList>
                                     </Menu>
                                 ) : (
@@ -129,11 +127,15 @@ export const Navbar = () => {
                                                         {option.label}
                                                     </MenuButton>
                                                     <MenuList>
-                                                        {productOptions.map((prodOption) => (
-                                                            <MenuItem key={prodOption.id} as={Link} to={prodOption.path}>
-                                                                {prodOption.label}
-                                                            </MenuItem>
-                                                        ))}
+                                                        {loading ? (
+                                                            <MenuItem>Cargando...</MenuItem>
+                                                        ) : (
+                                                            categories.map((category) => (
+                                                                <MenuItem key={category}>
+                                                                    <Link to={`/category/${category}`}>{category}</Link>
+                                                                </MenuItem>
+                                                            ))
+                                                        )}
                                                     </MenuList>
                                                 </Menu>
                                             ) : (
