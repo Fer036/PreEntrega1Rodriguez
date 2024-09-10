@@ -1,8 +1,7 @@
 import React from 'react';
-
+import './App.css'
 import { ChakraProvider } from '@chakra-ui/react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 import { MainRouter } from './routes';
 
 function App() {

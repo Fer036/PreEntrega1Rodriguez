@@ -29,7 +29,7 @@ import { useCategory } from '../../hooks';
 
 export const Navbar = () => {
     const { colorMode, toggleColorMode } = useColorMode();
-    const { categories, loading } = useCategory(); 
+    const { categories, loading } = useCategory();
     const { isOpen, onOpen, onClose } = useDisclosure();
 
     const menuOptions = [
@@ -46,7 +46,7 @@ export const Navbar = () => {
 
     return (
         <>
-            <Box bg={useColorModeValue('blue.800', 'gray.900')} px={4} style={boxShadowStyle}>
+            <Box bg={useColorModeValue('blue.800', 'gray.900')} px={4} style={{ boxShadowStyle }} justifyContent={'center'}>
                 <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
                     {/* Logo */}
                     <Box>
@@ -55,7 +55,7 @@ export const Navbar = () => {
 
                     {/* Secciones */}
                     <Flex display={{ base: 'none', md: 'flex' }} flex={1} justifyContent={'center'} color={'white'}>
-                        <HStack as={'nav'} spacing={4} alignItems={'center'}>
+                        <HStack as={'nav'} spacing={7} alignItems={'center'}>
                             {menuOptions.map((option) => (
                                 option.label === 'Productos' ? (
                                     <Menu key={option.id} isLazy>
@@ -63,6 +63,8 @@ export const Navbar = () => {
                                             as={Button}
                                             variant="link"
                                             color="white"
+                                            style={{ textTransform: 'uppercase' }}
+                                            _hover={{ color: 'orange.400' }}
                                         >
                                             {option.label}
                                         </MenuButton>
@@ -71,7 +73,7 @@ export const Navbar = () => {
                                                 <MenuItem>Cargando...</MenuItem>
                                             ) : (
                                                 categories.map((category) => (
-                                                    <MenuItem key={category}>
+                                                    <MenuItem key={category} _hover={{ color: 'orange.500' }} style={{ textTransform: 'uppercase' }}>
                                                         <Link to={`/category/${category}`}>{category}</Link>
                                                     </MenuItem>
                                                 ))
@@ -80,7 +82,14 @@ export const Navbar = () => {
                                     </Menu>
                                 ) : (
                                     <Link key={option.id} to={option.path}>
-                                        <Button variant="link" color="white">{option.label}</Button>
+                                        <Button
+                                            variant="link"
+                                            color="white"
+                                            _hover={{ color: 'orange.400' }}
+                                            style={{textTransform: 'uppercase'}}
+                                        >
+                                            {option.label}
+                                        </Button>
                                     </Link>
                                 )
                             ))}
@@ -116,14 +125,20 @@ export const Navbar = () => {
                             <DrawerOverlay />
                             <DrawerContent>
                                 <DrawerCloseButton />
-                                <DrawerHeader>Menú</DrawerHeader>
+                                <DrawerHeader>GeekStore</DrawerHeader>
 
                                 <DrawerBody>
                                     <Stack direction={'column'} spacing={4}>
                                         {menuOptions.map((option) => (
                                             option.label === 'Productos' ? (
                                                 <Menu key={option.id} isLazy>
-                                                    <MenuButton as={Button} variant="link" width="full">
+                                                    <MenuButton 
+                                                        as={Button} 
+                                                        variant="link" 
+                                                        width="full" 
+                                                        _hover={{ color: 'orange.400' }}
+                                                        style={{textTransform: 'uppercase'}}    
+                                                    >
                                                         {option.label}
                                                     </MenuButton>
                                                     <MenuList>
@@ -131,7 +146,11 @@ export const Navbar = () => {
                                                             <MenuItem>Cargando...</MenuItem>
                                                         ) : (
                                                             categories.map((category) => (
-                                                                <MenuItem key={category}>
+                                                                <MenuItem 
+                                                                    key={category} 
+                                                                    _hover={{ color: 'orange.500' }}
+                                                                    style={{textTransform: 'uppercase'}}
+                                                                >
                                                                     <Link to={`/category/${category}`}>{category}</Link>
                                                                 </MenuItem>
                                                             ))
@@ -140,7 +159,14 @@ export const Navbar = () => {
                                                 </Menu>
                                             ) : (
                                                 <Link key={option.id} to={option.path}>
-                                                    <Button width="full" variant="link">{option.label}</Button>
+                                                    <Button 
+                                                        width="full" 
+                                                        variant="link" 
+                                                        _hover={{ color: 'orange.400' }}
+                                                        style={{textTransform: 'uppercase'}}
+                                                    >
+                                                        {option.label}
+                                                    </Button>
                                                 </Link>
                                             )
                                         ))}

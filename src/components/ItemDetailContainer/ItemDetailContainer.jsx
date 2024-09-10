@@ -42,37 +42,41 @@ export const ItemDetailContainer = ({ product }) => {
             <SimpleGrid
                 columns={{base: 1, lg: 2}}
                 spacing={{base: 6}}
-                py={{base: 10}}
+                p={{base: 5}}
                 mx={'auto'}
                 my={'3rem'}
                 border={'1px'}
                 w={{base: '50%'}}
                 borderRadius={'md'}
             >
-                <Flex justifyContent={{base: 'center', lg: 'end'}}>
+                <Flex justifyContent={{base: 'center', lg: 'end'}} alignItems={{base:'center'}}>
                     <Image
                         rounded={'md'}
                         alt={'product image'}
                         src={product.image}
                         fit={'cover'}
-                        w={{base: '80%'}}
-                        h={{base: '100%'}}
+                        w={{base: '90%'}}
+                        h={{base: '90%'}}
                     ></Image>
                     
                 </Flex>
-                <Stack textAlign={{base: 'center', lg: 'start'}} spacing={{base: 2}} alignItems={{base: 'center', lg: 'start'}}>
+                <Stack 
+                    textAlign={{base: 'center', lg: 'start'}} 
+                    spacing={{base: 2}} 
+                    alignItems={{base: 'center', lg: 'start'}}
+                >
                     <Box as={'header'}>
                         <Heading
                             lineHeight={1.1}
                             fontWeight={600}
-                            fontSize={{base: '2x1', sm: '4x1', lg: '5x1'}}
+                            fontSize={{base: '2x1'}}
                         >
                             {product.name}
                         </Heading>
                         <Text
                             color={useColorModeValue('blue.500', 'orange.500')}
                             fontWeight={600}
-                            fontSize={'2rem'}
+                            fontSize={'1.3rem'}
                         >
                             {product.price}
                         </Text>
@@ -89,7 +93,7 @@ export const ItemDetailContainer = ({ product }) => {
                         <VStack alignItems={{base: 'center', lg: 'start'}}>
                             <Text
                                 color={useColorModeValue('gray.500', 'gray.400')}
-                                fontSize={'1.4rem'}
+                                fontSize={'1rem'}
                                 fontWeight={'300'}
                                 textTransform={'uppercase'}
                             >
@@ -100,9 +104,9 @@ export const ItemDetailContainer = ({ product }) => {
 
                     <Button
                         rounded={'md'}
-                        w={'10rem'}
+                        w={'8rem'}
                         mt={6}
-                        size={'lg'}
+                        size={'sm'}
                         py={'7'}
                         bg={useColorModeValue('orange.600', 'gray.50')}
                         color={useColorModeValue('white', 'gray.900')}
