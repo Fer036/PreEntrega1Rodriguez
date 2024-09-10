@@ -1,15 +1,6 @@
 exports.handler = async function (event, context) {
     const products = [
         {
-            id: 0,
-            category: 'pc',
-            name: 'PC Gamer Ryzen 5',
-            price: '$956.000',
-            description: 'PC gamer | Ryzen 5 5600 | TGraf. RX 560 | 16gb | 512gb',
-            image: 'https://images.unsplash.com/photo-1660855551570-dd44e0ab800c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        },
-
-        {
             id: 1,
             category: 'pc',
             name: 'PC Gamer Ryzen 7',
