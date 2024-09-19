@@ -486,3 +486,324 @@ Ej: useProduct.jsx
 
 ##### CAMBIAR HOOKS COSTUMIZADOS AL CAMBIAR LA BASE DE DATOS POR UNA API #####
 
+-----------------------------------------------------------------------------
+
+<!-- ///////////////////////////////////////////////////// -->
+<!-- ///////////////////////////////////////////////////// -->
+
+
+# CLASE 09: ROUTING Y NAVEGACIÓN:
+
+## SPA: single page aplication:
+React trabaja con una aplicación de página simple. 
+
+## Navegabilidad:
+Permite entender dónde están parados los users y marcar secciones en las que tienen más interés. Permite controlar las acciones de ir adelante, volver y conocer el nav history. Además, entender la estructura (crawlers) de la app y proveer acceso optimizado/visibilizado a las distintas secciones. 
+
+>> Escalabilidad.
+>> Simpleza para manipular y modificar el código. 
+>> Mejora la UI. 
+
+## ORGANIZAR LA APP / ROUTING:
+>> Puntos de una app:
+1. Inicio. *Ruta/ - Ruta/componenteInicio/:id*
+2. Búsqueda. *Ruta/componenteInicio/item/:id*
+3. Detalle. */componenteCarrito*
+4. Confirmación. */componenteCheckOut*
+5. Fin.
+
+## REACT ROUTER:
+>> Instalación: 
+```sh
+npm i react-router-dom
+```
+>> Configuración:
+1. MainRouter.jsx:
+```sh
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+```
+
+2. Agregar funcionalidad: 
+```sh
+<BrowserRouter>
+    <Navbar />
+    <Routes>
+        <Route exact path='' element= {<Page/>} />
+        ...
+    </Routes>
+<BrowserRoutes>
+```
+
+>> Navegar una ruta: 
+```sh
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+<etiqueta>
+    <Link to={ '/pagina' }>
+        título
+    </Link>
+</etiqueta>
+```
+>> Parámetro de URL: 
+Es un dato dinámico que se puede pasar a una ruta.
+```sh
+<Route path='/:id'>
+```
+
+
+-----------------------------------------------------------------------------
+
+<!-- ///////////////////////////////////////////////////// -->
+<!-- ///////////////////////////////////////////////////// -->
+
+
+# CLASE 10: EVENTOS:
+>> ¿Qué es?:
+Es un estímulo programático que puede ser provocado de manera automática o del resultado de una interacción del usuario con la UI.
+
+## Tipo de eventos:
+>> Eventos automáticos: 
+Se genera por algún parámetro establecido de manera automática.
+
+>> Manuales: 
+Son las interacciones del usuario que producen alguna respuesta o efecto secundario.
+
+## DOM Events:
+>> Dispositivo/acción:
+Mouse, input, keyboard, wheel, focus, etc.
+
+>> Custom events:
+Es posible definir eventos propios que disparen la info que queramos. 
+
+## Event Listener:
+Es un patrón de diseño que sirve para escuchar cuando un algo ocurre en algún elemento, librería o API y poder realizar una acción en consecuencia.
+
+>> Configuración:
+```sh
+window.addEventListener('evento', referencia);
+```
+
+>> Removerlo después de utilizarlo:
+```sh
+return () => {
+    console.log('desmontar evento');
+    window.removeEventListener(referencia);
+};
+```
+## React y eventos:
+>> Synthetic events:
+Los browsers suelen tener algunas variaciones en el contenido de los eventos, lo que hace difícil utilizarlos uniformemente en cada plataforma. Es por eso que React ayuda proveyendo una abstracción. 
+
+1. Sirven para normalizar/estandarizar eventos.
+2. Al registrar un evento onClick obtenendremos un evento sintético. 
+3. Se destruyen al terminar la ejecución de la función vinculada.
+4. Se puede acceder al evento nativo via evt.nativeEvent.
+
+## Componentes basados en eventos: 
+>> Unidirectional Symmetry:
+Reacción (bajada de datos) => Acción (subida de eventos).
+
+## Intercambiabilidad/Agnostic Behavior:
+>> Intercambiabilidad: 
+Implementando componentes de manera eficiente se puede generar un interccambio de guncionalidades sin mucho esfuerzo. 
+Se puede generar variaciones del mismo componente con distinto layout y el mismo componente.
+
+>> Abstracción:
+Sirve como estrategia para ocultar el comportamiento interno de rendering  e implementación de change events. 
+
+## Orientación a eventos:
+1. Permite mover la lógica compleja a componentes de menor orden. 
+2. Si ambos se comportan igual, el parent no lo sabrá aunque sus implementaciones sean distintas.
+3. Permite que el parent se encargue del resultado final sin darle esa responsabilidad a sus children.
+
+## Código en clases:
+>> Creación de página Events.jsx + agregar en index.js;
+>> Agregar en MainRouter.jsx;
+>> Para agregar un addEventListener se utiliza dentro de un useEffect;
+>> Se desmonta para que no entre en un bucle infinito de la función donde no lo deseamos tener;
+
+```sh
+const onScroll = () => {
+    console.log('scrolling');
+}
+export const Event = () => {
+    useEffect(() => {
+        // Creación:
+        window.addEventListener('scroll', onScroll);
+
+        // Limpieza:
+        return () => {
+            console.log('componente desmontado');
+            window.removeEventListener('scroll', onScroll);
+        };
+    }, []);
+};
+```
+
+-----------------------------------------------------------------------------
+
+<!-- ///////////////////////////////////////////////////// -->
+<!-- ///////////////////////////////////////////////////// -->
+
+
+# CLASE 11: CONTEXT:
+React trabaja con un flujo de datos unidireccional, y transmite los datos vía props.
+Declarando un contexto podemos sacar todos los intermediarios. La variable debería ser global.
+
+1. Permiten compartir un valor único cross-app-
+2. Reducen el wrapper-hell (infierno de nesting);
+3. No sólo pueden llevar values, sino cualquier tipo de fn, obj o referencia. 
+4. Toman el valor del provider más cercano o el definido durante su declaración. 
+
+/////
+
+1. Puedo tener múltiples contextos del mismo corriendo en una app. 
+2. El valor provisto por el hook de contexto será el del parent provider más próximo del árbol de mi componente. 
+
+## Creación de un contexto: 
+```sh
+const ContextVariable = React.createContext();
+```
+>> Puedo darle un default value:
+```sh
+const ContextVariable = React.createContext(value);
+```
+
+## Context Provider:
+Se debe envolver el nodo de React al que quiero que este provider propague hacia sus children. 
+
+## Consumiendo un contexto:
+```sh
+import  React, { useContext } from 'react';
+
+const ContextVariable = React.useContext();
+
+function componentA2() {
+    const isValueMode = useContext(ContextVariable);
+    return <p> Modo del contexto: { isValueMode } </p>
+}
+```
+
+## Declarando un Consumer (Modo alternativo):
+Utilizando un consumer, podemos lograr un efecto similar, y si el value cambia React hará el re-render cuando cambbie el value del provider.
+Son cómodos cuando no necesitamos el estado en el componente consumidor (ComponenteA2) para lograr otro efecto secundario. 
+
+## Contexto dinámico: 
+Pueden ser alterados en tiempo de ejecución, y sus efectos propagados al resto de los consumidores. 
+
+## Configurando un Nodo Proveedor: 
+1. Saber elefir cuál es el punto estratégico de mi app donde iniciaré el estado de ese context.
+2. Combinarlo estratégicamente con un useState para poder mutarlo y que me auide a hacer trigger de renderings en consumers.
+
+## Creando un Custom Provider: 
+>> Context Dinámico:
+1. Creamos un componente virtual de fachada.
+2. Podemos agregar helpers.
+3. Podemos hacer wrapping de cualquier nodo que quiera transformar en provider. 
+
+## Consumir el Custom Provider: 
+1. Envolvemos los componentes que querramos.
+2. El custom Provider dará estado y hará sync con sus consumers de manera automática en updates.
+
+## Código en clases: 
+```sh
+/CartWidget.jsx:
+
+import { Box, Icon, Text } from '@chakra-ui/react';
+import { FaShoppingCart } from 'react-icons/fa';
+import { CartContext } from '../../context/CartContext';
+import { useContext } from 'react';
+
+export const CartWidget = () => {
+    const { cartState } = useContext(CartContext);
+
+    return (
+        <Box position='relative' display='inline-block' ml={4}>
+            <Icon as={FaShoppingCart} w={5} h={5} />
+            <Text
+                position={'absolute'}
+                top={'-2'}
+                right={'-2'}
+                bg={'red.500'}
+                borderRadius={'50px'}
+                color={'white'}
+                px={1}
+                fontSize={'0.6rem'}
+            >
+                {cartState}
+            </Text>
+        </Box>
+    )
+};
+```
+
+```sh
+/CartContent.jsx:
+
+
+import React, { useState } from "react";
+
+export const CartContext = React.createContext();
+
+export const CartProvider = ({ children }) => {
+    const [cartState, setCartState] = useState(0);
+
+    return (
+        <CartContext.Provider value={{ cartState }}> { children } </CartContext.Provider>
+    );
+};
+```
+
+
+-----------------------------------------------------------------------------
+
+<!-- ///////////////////////////////////////////////////// -->
+<!-- ///////////////////////////////////////////////////// -->
+
+
+# CLASE 12: RENDERIZADO:
+
+>> Rendering condicional:
+Ejemplo: loading. Se condiciona que mientras esté cargando la página aparezca un spinner. Si la página se carga, aparecerá el contenedor con contenido. 
+=> Elegimos que queremos renderizar.
+
+>> ¿Para qué sirve?
+1. Para aparecer y desaparecer nodos del render. 
+2. Los eventos provocan dismounting y todos los efectos que ellos conlleva. 
+3. Se llamará efecto de desmontaje y podremos detectarlo.
+4. Podemos usar los cleanup effects para detectar algún dismounting si no sabemos con certeza si ocurre. 
+5. A veces se producen sin internción y causan bugs o pérdida no intencionada del estado, dando inestabilidad.
+
+>> ¿Que sucede cuando existe un cambio de estado en algún componente? 
+En cada cambio de estado, el componente se renderiza. (el hijo).
+
+>> React.memo:
+Memoriza el estado en el que está ese elemento, lo que hace que no se renderice. 
+No se debe usar indiscriminadamente. Se utiliza más que nada cuando tenemos código costoso o pesado para no afectar la performance de la página renderizándola. 
+Cambia solamente cuando cambia la propiedad del mismo elemento envuelto. 
+
+-----------------------------------------------------------------------------
+
+<!-- ///////////////////////////////////////////////////// -->
+<!-- ///////////////////////////////////////////////////// -->
+
+
+# CLASE 13 y 14: FIREBASE
+
+## WHYW:
+Proceso de explorar nuevas tecnologías.
+1. What?
+Sorpresa, intriga. 
+
+2. Hell Yeah!
+Emoción de tener la respuesta y la adaptación.
+
+3. What?
+Cuando empezamos a usarla y no sabemos que estamos haciendo. 
+
+
+## Desarrollo clásico:
+1. SPA corre en el Browser
+2. Consume API proviste por el BACKEND
+3. Para llegar a la BASE DE DATOS accede y guarda vía SQL, noSQL, etc.

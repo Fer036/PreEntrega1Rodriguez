@@ -5,9 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "netlify-dev": "netlify dev",
     "build": "vite build",
-    "lint": "eslint .",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -17,7 +16,9 @@
     "@emotion/styled": "^11.13.0",
     "axios": "^1.7.7",
     "bootstrap": "^5.3.3",
+    "chakra": "^0.0.3",
     "cors": "^2.8.5",
+    "firebase": "^10.13.2",
     "framer-motion": "^11.5.4",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.4",
@@ -40,5 +41,13 @@
   "description": "1. E-COMMERCE: GeekStore - tienda de setups y cómics.\r 2. Componente NavBar - con theme color, logo y secciones - // y componente CartWidget - con un ícono carrito y notificación con número hardcodeado -.\r 3. ItemListContainer con prop greeting.",
   "main": "vite.config.js",
   "author": "María Rodríguez",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fer036/PreEntrega1Rodriguez.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Fer036/PreEntrega1Rodriguez/issues"
+  },
+  "homepage": "https://github.com/Fer036/PreEntrega1Rodriguez#readme"
 }

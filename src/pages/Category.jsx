@@ -1,8 +1,8 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { ItemListContainer } from '../components';
-import { useProductsByCategory } from '../hooks';
-import { Flex, Spinner } from '@chakra-ui/react';
+/* import { useProductsByCategory } from '../hooks';
+ */import { Flex, Spinner } from '@chakra-ui/react';
 
 export const Category = () => {
     const { category } = useParams();

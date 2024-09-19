@@ -1,21 +1,20 @@
 import React from "react";
-import { getCategories } from '../services/products.service';
 
 export const useCategory = () => {
     const [categories, setCategories] = React.useState([]);
     const [loading, setLoading] = React.useState(true);
+    const [error, setError] = React.useState(false);
 
     React.useEffect(() => {
         getCategories()
             .then((res) => {
-                console.log(res.data)
                 setCategories(res.data);
             })
-            .catch((err) => {
-                console.log(err);
+            .catch((error) => {
+                setError(error);
             })
             .finally(() => setLoading(false));
     }, []);
 
-    return { categories, loading };
+    return { categories, loading, error };
 };

@@ -1,26 +1,25 @@
 import React from "react";
-import { getProductsById } from '../services/products.service';
+import { doc, getDoc } from 'firebase/firestore';
+import {db} from '../firebase';
 
 export const useProductsById = (id) => {
     const [product, setProduct] = React.useState(null);
     const [loading, setLoading] = React.useState(true);
+    const [error, setError] = React.useState(false);
 
     React.useEffect(() => {
-        const parsedId = parseInt(id, 10);
-        if (parsedId) {
-            getProductsById(parsedId)
-                .then((res) => {
-                    const foundProduct = res.data.find(item => item.id === parsedId);
-                    setProduct(foundProduct);
-                })
-                .catch((err) => {
-                    console.error(err);
-                })
-                .finally(() => {
-                    setLoading(false);
-                });
-        }
-    }, [id]);
+        const productItem = doc(db, 'products', id);
+        getDoc(productItem)
+            .then((snapshot) => {
+                setProduct(
+                    {id: snapshot.id, ...snapshot.data()}
+                );
+            })
+            .catch((error) => {
+                setError(error)
+            })
+            .finally(() => setLoading(false));
+    }, []);
 
-    return { product, loading };
+    return { product, loading, error };
 };

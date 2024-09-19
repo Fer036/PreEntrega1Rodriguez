@@ -21,16 +21,19 @@ import {
     MenuList,
     MenuItem
 } from '@chakra-ui/react';
+
 import { MoonIcon, SunIcon, HamburgerIcon } from '@chakra-ui/icons';
 import myLogo2 from '/src/assets/img/myLogo2.png';
+
+import { createProductsFirestore } from '../../helpers'
 import { CartWidget } from '../index';
 import { Link } from 'react-router-dom';
-import { useCategory } from '../../hooks';
+/* import { useCategory } from '../../hooks'; */
 
 export const Navbar = () => {
     const { colorMode, toggleColorMode } = useColorMode();
-    const { categories, loading } = useCategory();
-    const { isOpen, onOpen, onClose } = useDisclosure();
+/*     const { categories, loading } = useCategory();
+ */    const { isOpen, onOpen, onClose } = useDisclosure();
 
     const menuOptions = [
         { id: 1, label: 'Inicio', path: '/' },
@@ -68,7 +71,7 @@ export const Navbar = () => {
                                         >
                                             {option.label}
                                         </MenuButton>
-                                        <MenuList>
+                                        {/*                                         <MenuList>
                                             {loading ? (
                                                 <MenuItem>Cargando...</MenuItem>
                                             ) : (
@@ -78,7 +81,7 @@ export const Navbar = () => {
                                                     </MenuItem>
                                                 ))
                                             )}
-                                        </MenuList>
+                                        </MenuList> */}
                                     </Menu>
                                 ) : (
                                     <Link key={option.id} to={option.path}>
@@ -86,7 +89,7 @@ export const Navbar = () => {
                                             variant="link"
                                             color="white"
                                             _hover={{ color: 'orange.400' }}
-                                            style={{textTransform: 'uppercase'}}
+                                            style={{ textTransform: 'uppercase' }}
                                         >
                                             {option.label}
                                         </Button>
@@ -97,13 +100,14 @@ export const Navbar = () => {
                     </Flex>
 
                     {/* Icono cartwidget y botón modo oscuro y claro */}
-                    <Flex alignItems={'center'} ml={4} display={{ base: 'none', md: 'flex' }}>
+                    <Flex alignItems={'center'} ml={3} display={{ base: 'none', md: 'flex' }}>
                         <Button onClick={toggleColorMode}>
                             {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
                         </Button>
-                        <Box ml={4} color={'white'}>
+                        <Box mx={4} color={'white'}>
                             <CartWidget />
                         </Box>
+                        <Button mx={2} onClick={() => createProductsFirestore('products')}> Crear </Button>
                     </Flex>
 
                     {/* Menú hamburguesa para pantalla sm */}
@@ -132,38 +136,38 @@ export const Navbar = () => {
                                         {menuOptions.map((option) => (
                                             option.label === 'Productos' ? (
                                                 <Menu key={option.id} isLazy>
-                                                    <MenuButton 
-                                                        as={Button} 
-                                                        variant="link" 
-                                                        width="full" 
+                                                    <MenuButton
+                                                        as={Button}
+                                                        variant="link"
+                                                        width="full"
                                                         _hover={{ color: 'orange.400' }}
-                                                        style={{textTransform: 'uppercase'}}    
+                                                        style={{ textTransform: 'uppercase' }}
                                                     >
                                                         {option.label}
                                                     </MenuButton>
-                                                    <MenuList>
+                                                    {/*                                                     <MenuList>
                                                         {loading ? (
                                                             <MenuItem>Cargando...</MenuItem>
                                                         ) : (
                                                             categories.map((category) => (
-                                                                <MenuItem 
-                                                                    key={category} 
+                                                                <MenuItem
+                                                                    key={category}
                                                                     _hover={{ color: 'orange.500' }}
-                                                                    style={{textTransform: 'uppercase'}}
+                                                                    style={{ textTransform: 'uppercase' }}
                                                                 >
                                                                     <Link to={`/category/${category}`}>{category}</Link>
                                                                 </MenuItem>
                                                             ))
                                                         )}
-                                                    </MenuList>
+                                                    </MenuList> */}
                                                 </Menu>
                                             ) : (
                                                 <Link key={option.id} to={option.path}>
-                                                    <Button 
-                                                        width="full" 
-                                                        variant="link" 
+                                                    <Button
+                                                        width="full"
+                                                        variant="link"
                                                         _hover={{ color: 'orange.400' }}
-                                                        style={{textTransform: 'uppercase'}}
+                                                        style={{ textTransform: 'uppercase' }}
                                                     >
                                                         {option.label}
                                                     </Button>
