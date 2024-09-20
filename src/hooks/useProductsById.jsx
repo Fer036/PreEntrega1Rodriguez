@@ -1,6 +1,6 @@
 import React from "react";
 import { doc, getDoc } from 'firebase/firestore';
-import {db} from '../firebase';
+import { db } from '../firebase';
 
 export const useProductsById = (id) => {
     const [product, setProduct] = React.useState(null);
@@ -11,15 +11,13 @@ export const useProductsById = (id) => {
         const productItem = doc(db, 'products', id);
         getDoc(productItem)
             .then((snapshot) => {
-                setProduct(
-                    {id: snapshot.id, ...snapshot.data()}
-                );
+                setProduct({ id: snapshot.id, ...snapshot.data() });
             })
             .catch((error) => {
-                setError(error)
+                setError(error);
             })
             .finally(() => setLoading(false));
-    }, []);
+    }, [id]);
 
     return { product, loading, error };
 };

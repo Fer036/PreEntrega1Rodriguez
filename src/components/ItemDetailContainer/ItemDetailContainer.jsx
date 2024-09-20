@@ -19,7 +19,7 @@ export const ItemDetailContainer = ({ product }) => {
     const [showCount, setShowCount] = useState(false);
     const [count, setCount] = useState(0);
 
-    const { addItems, removeItem } = useContext(CartContext);
+    const { addItem, removeItem } = useContext(CartContext);
 
     const handleShowCount = () => {
         setShowCount(!showCount);
@@ -29,7 +29,7 @@ export const ItemDetailContainer = ({ product }) => {
         if (count <= product.stock ) {
             const newCount = count + 1;
             setCount(newCount);
-            addItems(product, newCount);
+            addItem(product, newCount);
         }
     };
 

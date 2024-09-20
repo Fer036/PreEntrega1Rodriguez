@@ -1,3 +1,5 @@
+import React from 'react';
+
 import {
     Box,
     Card,
@@ -10,6 +12,7 @@ import {
     ButtonGroup,
     Button,
 } from '@chakra-ui/react';
+
 import { Link } from 'react-router-dom';
 
 export const ItemListContainer = ({ products }) => {

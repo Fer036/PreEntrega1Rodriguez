@@ -1,10 +1,12 @@
 import React from 'react';
-import { Flex, Spinner } from '@chakra-ui/react';
-import { useProducts } from '../hooks/useProducts';
+import { Box, Flex, Spinner } from '@chakra-ui/react';
+import { useItemsCollection } from '../hooks/useItemsCollection';
 import { ItemListContainer } from '../components';
+import { HomeBanner } from '../components/HomeBanner/HomeBanner';
 
 export const Home = () => {
-    const { products, loading } = useProducts();
+    const { items, loading, error } = useItemsCollection('products');
+
     return loading ? (
         <Flex
             width={'100%'}
@@ -14,7 +16,14 @@ export const Home = () => {
         >
             <Spinner size={'xl'} />
         </Flex>
+    ) : error ? (
+        <Box>
+            Error en la carga de productos.
+        </Box>
     ) : (
-        <ItemListContainer products={products} />
+        <Box>
+            <HomeBanner />
+            <ItemListContainer products={items} />
+        </Box>
     );
 };
