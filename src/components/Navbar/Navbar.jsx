@@ -3,7 +3,6 @@ import {
     Box,
     Flex,
     Button,
-    ButtonGroup,
     useColorModeValue,
     Stack,
     useColorMode,
@@ -45,25 +44,30 @@ export const Navbar = () => {
         MozBoxShadow: '0px 8px 8px -8px rgba(71,70,70,1)'
     };
 
+    const colorText = useColorModeValue('black', 'white');
+
     return (
         <Box bg={useColorModeValue('gray.700', 'gray.900')} px={4} style={boxShadowStyle}>
             <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
                 {/* Logo de la empresa */}
                 <Box>
-                    <img width={'250px'} src={myLogo2} alt="logo" />
+                    <Link to={`/`}>
+                        <img width={'250px'} src={myLogo2} alt="logo" />
+                    </Link>
                 </Box>
 
                 {/* Secciones */}
                 <Flex display={{ base: 'none', md: 'flex' }} flex={1} justifyContent={'center'} color={'white'}>
-                    <HStack as={'nav'} spacing={7} alignItems={'center'}>
+                    <HStack as={'nav'} spacing={9} alignItems={'center'}>
                         {menuOptions.map((option) => (
                             option.label === 'Productos' ? (
                                 /* Menú desplegable para las categorías */
                                 <Menu key={option.id} isLazy>
                                     <MenuButton
+                                        justifyContent={'center'}
                                         as={Button}
                                         variant="link"
-                                        color="white"
+                                        color={'white'}
                                         style={{ textTransform: 'uppercase' }}
                                         _hover={{ color: 'orange.400' }}
                                     >
@@ -74,7 +78,7 @@ export const Navbar = () => {
                                             <MenuItem>Cargando...</MenuItem>
                                         ) : (
                                             categories.map((category) => (
-                                                <MenuItem key={category.id} _hover={{ color: 'orange.500' }} style={{ textTransform: 'uppercase' }}>
+                                                <MenuItem key={category.id} _hover={{ color: 'orange.500' }} color={colorText} style={{ textTransform: 'uppercase' }}>
                                                     <Link to={`/category/${category.slug}`}>{category.name}</Link>
                                                 </MenuItem>
                                             ))
@@ -86,7 +90,8 @@ export const Navbar = () => {
                                 <Link key={option.id} to={option.path}>
                                     <Button
                                         variant="link"
-                                        color="white"
+                                        color={'white'}
+                                        m={'auto'}
                                         _hover={{ color: 'orange.400' }}
                                         style={{ textTransform: 'uppercase' }}
                                     >
@@ -98,7 +103,7 @@ export const Navbar = () => {
                     </HStack>
                 </Flex>
                 {/* Botón modo oscuro/claro */}
-                <Flex alignItems={'center'} ml={3} display={{ base: 'none', md: 'flex' }}>
+                <Flex alignItems={'center'} ml={9} display={{ base: 'none', md: 'flex' }}>
                     <Button
                         onClick={toggleColorMode}
                         variant={'outline'}
@@ -108,7 +113,7 @@ export const Navbar = () => {
                     >
                         {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
                     </Button>
-                    <Box mx={4} color={'white'}>
+                    <Box mx={6} color={'white'}>
                         <CartWidget />
                     </Box>
                 </Flex>
@@ -142,17 +147,17 @@ export const Navbar = () => {
                                                     as={Button}
                                                     variant="link"
                                                     width="full"
+                                                    color={colorText}
                                                     _hover={{ color: 'orange.400' }}
                                                     style={{ textTransform: 'uppercase' }}
                                                 >
                                                     {option.label}
                                                 </MenuButton>
                                                 <MenuList>
-                                                    {loading ? (
-                                                        <MenuItem>Cargando...</MenuItem>
-                                                    ) : (
+                                                    {
                                                         categories.map((category) => (
                                                             <MenuItem
+                                                                color={colorText}
                                                                 key={category.id}
                                                                 _hover={{ color: 'orange.500' }}
                                                                 style={{ textTransform: 'uppercase' }}
@@ -160,7 +165,7 @@ export const Navbar = () => {
                                                                 <Link to={`/category/${category.slug}`}>{category.name}</Link>
                                                             </MenuItem>
                                                         ))
-                                                    )}
+                                                    }
                                                 </MenuList>
                                             </Menu>
                                         ) : (
@@ -168,6 +173,7 @@ export const Navbar = () => {
                                                 <Button
                                                     width="full"
                                                     variant="link"
+                                                    color={colorText}
                                                     _hover={{ color: 'orange.400' }}
                                                     style={{ textTransform: 'uppercase' }}
                                                 >

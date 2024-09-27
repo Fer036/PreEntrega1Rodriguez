@@ -11,7 +11,7 @@ export const HomeBanner = () => {
     const bgColor = 'rgba(255, 255, 255, 0.1)';
     const backdropFilter = 'blur(15px)';
     const borderStyle = '1px solid rgba(255, 255, 255, 0.2)';
-    const textColor = useColorModeValue('orange.500', 'white');
+    const textColor = useColorModeValue('white', 'white');
 
     return (
         <Flex
