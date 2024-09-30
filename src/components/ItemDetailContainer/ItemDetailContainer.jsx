@@ -1,17 +1,17 @@
 import { useContext, useState } from "react";
 import {
-    Box,
-    Container,
     Stack,
     Text,
     Image,
     Flex,
-    VStack,
     Button,
     Heading,
-    SimpleGrid,
-    StackDivider,
     useColorModeValue,
+    Alert,
+    AlertIcon,
+    AlertTitle,
+    AlertDescription,
+    Box
 } from '@chakra-ui/react';
 import { CartContext } from "../../context/CartContext";
 
@@ -26,7 +26,7 @@ export const ItemDetailContainer = ({ product }) => {
     };
 
     const handleIncrement = () => {
-        if (count <= product.stock ) {
+        if (count <= product.stock) {
             const newCount = count + 1;
             setCount(newCount);
             addItem(product, newCount);
@@ -42,88 +42,79 @@ export const ItemDetailContainer = ({ product }) => {
     };
 
     if (!product) {
-        return <p>Producto no encontrado.</p>;
-    }
+        return (
+            <Alert status='error'>
+                <AlertIcon />
+                <AlertTitle>¡Producto no encontrado!</AlertTitle>
+                <AlertDescription>Ups... parece que ese producto no existe.</AlertDescription>
+            </Alert>
+        );
+    };
+
+    const bgItemDetail = useColorModeValue('linear-gradient(315deg, #cacaca, #f0f0f0)', '#1A202C');
+    const shadowItemDetail = useColorModeValue('-6px -6px 19px #b3b3b3, 6px 6px 19px #ffffff', '-5px -5px 10px #11151d, 5px 5px 10px #232b3b');
+    const textColor = useColorModeValue('blue.700', 'orange.700');
 
     return (
-        <Container maxW={'7x1'}>
-            <SimpleGrid
-                columns={{base: 1, lg: 2}}
-                spacing={{base: 6}}
-                p={{base: 5}}
-                mx={'auto'}
-                my={'3rem'}
-                border={'1px'}
-                w={{base: '50%'}}
-                borderRadius={'md'}
+        <Flex
+            w={'70%'}
+            py={'3rem'}
+            px={'1rem'}
+            mx={'auto'}
+            my={'2rem'}
+            flexWrap={'wrap'}
+            justifyContent={'space-evenly'}
+            alignItems={'center'}
+            boxShadow={shadowItemDetail}
+            bg={bgItemDetail}
+            borderRadius={'20px'}
+        >
+            <Flex>
+                <Image
+                    w={{ base: '12rem', sm: '20rem', md: '25rem' }}
+                    boxShadow={shadowItemDetail}
+                    borderRadius={'20px'}
+                    alt={'product image'}
+                    src={product.image}
+                    fit={'fill'}
+                />
+            </Flex>
+            <Flex
+                m={'1rem'}
+                flexWrap={'wrap'}
             >
-                <Flex justifyContent={{base: 'center', lg: 'end'}} alignItems={{base:'center'}}>
-                    <Image
-                        rounded={'md'}
-                        alt={'product image'}
-                        src={product.image}
-                        fit={'cover'}
-                        w={{base: '90%'}}
-                        h={{base: '90%'}}
-                    ></Image>
-                    
-                </Flex>
-                <Stack 
-                    textAlign={{base: 'center', lg: 'start'}} 
-                    spacing={{base: 2}} 
-                    alignItems={{base: 'center', lg: 'start'}}
-                >
-                    <Box as={'header'}>
-                        <Heading
-                            lineHeight={1.1}
-                            fontWeight={600}
-                            fontSize={{base: '2x1'}}
-                        >
+                <Box mx={'2rem'}>
+                    <Stack>
+                        <Heading color={'gray.500'}>
                             {product.name}
                         </Heading>
                         <Text
-                            color={useColorModeValue('blue.500', 'orange.500')}
-                            fontWeight={600}
-                            fontSize={'1.3rem'}
+                            color={textColor}
+                            fontWeight={'900'}
+                            fontSize={'2rem'}
                         >
-                            {product.price}
+                            ${product.price}
                         </Text>
-                    </Box>
-
-                    <Stack
-                        direction={'column'}
-                        divider={
-                            <StackDivider 
-                                borderColor={useColorModeValue('white', 'gray.400')}
-                            />
-                        }
-                    >
-                        <VStack alignItems={{base: 'center', lg: 'start'}}>
-                            <Text
-                                color={useColorModeValue('gray.500', 'gray.400')}
-                                fontSize={'1rem'}
-                                fontWeight={'300'}
-                                textTransform={'uppercase'}
-                            >
-                                {product.description}
-                            </Text>
-                        </VStack>
                     </Stack>
-
+                    <Stack>
+                        <Text>
+                            {product.description}
+                        </Text>
+                    </Stack>
+                </Box>
+                <Box
+                    mx={'2rem'}
+                    display={'flex'}
+                    flexDir={'column'}
+                    justifyContent={'center'}
+                    alignItems={'center'}
+                >
                     <Button
-                        rounded={'md'}
-                        w={'8rem'}
-                        mt={6}
-                        size={'sm'}
-                        py={'7'}
-                        bg={useColorModeValue('orange.600', 'gray.50')}
-                        color={useColorModeValue('white', 'gray.900')}
-                        textTransform={'uppercase'}
-                        _hover={{
-                            transform: 'translateY(-2px)',
-                            boxShadow: 'lg',
-                        }}
+                        mx={'auto'}
                         onClick={handleShowCount}
+                        color={textColor}
+                        bg={bgItemDetail}
+                        boxShadow={shadowItemDetail}
                     >
                         Agregar
                     </Button>
@@ -134,13 +125,26 @@ export const ItemDetailContainer = ({ product }) => {
                             align={'center'}
                             mt={4}
                         >
-                            <Button onClick={handleDecrement}> - </Button>
-                            <Text fontSize={'1.6rem'}>{count}</Text>
-                            <Button onClick={handleIncrement}>+</Button>
+                            <Button
+                                onClick={handleDecrement}
+                                bg={bgItemDetail}
+                                shadow={shadowItemDetail}
+                            >
+                                - 
+                            </Button>
+                            <Text my={'auto'} fontSize={'1.2rem'}>{count}</Text>
+
+                            <Button 
+                                onClick={handleIncrement}
+                                bg={bgItemDetail}
+                                boxShadow={shadowItemDetail}
+                            >
+                                    +
+                            </Button>
                         </Stack>
                     )}
-                </Stack>
-            </SimpleGrid>
-        </Container>
+                </Box>
+            </Flex>
+        </Flex>
     );
 };

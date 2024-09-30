@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {
     Box,
     Flex,
@@ -21,8 +22,10 @@ import {
     MenuList,
     MenuItem
 } from '@chakra-ui/react';
-import { MoonIcon, SunIcon, HamburgerIcon } from '@chakra-ui/icons';
+
 import myLogo2 from '/src/assets/img/myLogo2.png';
+
+import { MoonIcon, SunIcon, HamburgerIcon } from '@chakra-ui/icons';
 import { CartWidget } from '../index';
 import { Link } from 'react-router-dom';
 import { useItemsCollection } from '../../hooks';
@@ -38,47 +41,69 @@ export const Navbar = () => {
         { id: 3, label: 'Contacto', path: '/contact' },
     ];
 
-    const boxShadowStyle = {
-        boxShadow: '0px 8px 8px -8px rgba(71,70,70,1)',
-        WebkitBoxShadow: '0px 8px 8px -8px rgba(71,70,70,1)',
-        MozBoxShadow: '0px 8px 8px -8px rgba(71,70,70,1)'
-    };
-
-    const colorText = useColorModeValue('black', 'white');
+    const boxShadow = useColorModeValue('-6px -6px 19px #b3b3b3, 6px 6px 19px #ffffff', '-5px -5px 10px #11151d, 5px 5px 10px #232b3b');
+    const colorText = useColorModeValue('gray.500', 'white');
+    const navBg = useColorModeValue('gray.800', '#1A202C');
 
     return (
-        <Box bg={useColorModeValue('gray.700', 'gray.900')} px={4} style={boxShadowStyle}>
-            <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
-                {/* Logo de la empresa */}
+        <Box
+            zIndex={0}
+            h={'4.5rem'}
+            m={'0.4rem'}
+            px={5}
+            justifyContent={'center'}
+            boxShadow={boxShadow}
+            bg={navBg}
+            borderRadius={'20px'}
+            alignItems={'center'}
+        >
+            <Flex
+                h={16}
+                alignItems={'center'}
+                justifyContent={'space-between'}
+            >
                 <Box>
                     <Link to={`/`}>
                         <img width={'250px'} src={myLogo2} alt="logo" />
                     </Link>
                 </Box>
 
-                {/* Secciones */}
-                <Flex display={{ base: 'none', md: 'flex' }} flex={1} justifyContent={'center'} color={'white'}>
-                    <HStack as={'nav'} spacing={9} alignItems={'center'}>
+                <Flex
+                    display={{ base: 'none', md: 'flex' }}
+                    flex={1}
+                    justifyContent={'center'}
+                >
+                    <HStack
+                        as={'nav'}
+                        spacing={9}
+                        alignItems={'center'}
+                    >
                         {menuOptions.map((option) => (
                             option.label === 'Productos' ? (
-                                /* Menú desplegable para las categorías */
                                 <Menu key={option.id} isLazy>
                                     <MenuButton
                                         justifyContent={'center'}
+                                        py={'0.6rem'}
+                                        px={'1rem'}
                                         as={Button}
                                         variant="link"
-                                        color={'white'}
+                                        color={colorText}
                                         style={{ textTransform: 'uppercase' }}
-                                        _hover={{ color: 'orange.400' }}
+                                        _hover={{ boxShadow: '-5px -5px 10px #11151d, 5px 5px 10px #232b3b' }}
                                     >
                                         {option.label}
                                     </MenuButton>
                                     <MenuList>
                                         {loading ? (
-                                            <MenuItem>Cargando...</MenuItem>
+                                            <MenuItem>...</MenuItem>
                                         ) : (
                                             categories.map((category) => (
-                                                <MenuItem key={category.id} _hover={{ color: 'orange.500' }} color={colorText} style={{ textTransform: 'uppercase' }}>
+                                                <MenuItem
+                                                    key={category.id}
+                                                    _hover={{ boxShadow: boxShadow }}
+                                                    color={colorText}
+                                                    style={{ textTransform: 'uppercase' }}
+                                                >
                                                     <Link to={`/category/${category.slug}`}>{category.name}</Link>
                                                 </MenuItem>
                                             ))
@@ -86,14 +111,17 @@ export const Navbar = () => {
                                     </MenuList>
                                 </Menu>
                             ) : (
-                                /* Botón Inicio y Contacto */
-                                <Link key={option.id} to={option.path}>
+                                <Link
+                                    key={option.id}
+                                    to={option.path}
+                                >
                                     <Button
                                         variant="link"
-                                        color={'white'}
                                         m={'auto'}
-                                        _hover={{ color: 'orange.400' }}
+                                        _hover={{ boxShadow: '-5px -5px 10px #11151d, 5px 5px 10px #232b3b' }}
                                         style={{ textTransform: 'uppercase' }}
+                                        px={'1rem'}
+                                        py={'0.6rem'}
                                     >
                                         {option.label}
                                     </Button>
@@ -102,12 +130,15 @@ export const Navbar = () => {
                         ))}
                     </HStack>
                 </Flex>
-                {/* Botón modo oscuro/claro */}
-                <Flex alignItems={'center'} ml={9} display={{ base: 'none', md: 'flex' }}>
+                <Flex
+                    ml={9}
+                    display={{ base: 'none', md: 'flex' }}
+                    alignItems={'center'}
+                >
                     <Button
                         onClick={toggleColorMode}
                         variant={'outline'}
-                        colorScheme='blue'
+                        colorScheme={'blue'}
                         borderRadius={'20px'}
                         width={'40px'}
                     >
@@ -117,8 +148,10 @@ export const Navbar = () => {
                         <CartWidget />
                     </Box>
                 </Flex>
-                {/* Menú hamburguesa */}
-                <Flex alignItems={'center'} display={{ base: 'flex', md: 'none' }}>
+                <Flex
+                    alignItems={'center'}
+                    display={{ base: 'flex', md: 'none' }}
+                >
                     <IconButton
                         size={'md'}
                         icon={<HamburgerIcon />}
@@ -130,14 +163,13 @@ export const Navbar = () => {
                     </Box>
                     <Drawer
                         isOpen={isOpen}
-                        placement="left"
+                        placement={'left'}
                         onClose={onClose}
                     >
                         <DrawerOverlay />
                         <DrawerContent>
                             <DrawerCloseButton />
                             <DrawerHeader>GeekStore</DrawerHeader>
-
                             <DrawerBody>
                                 <Stack direction={'column'} spacing={4}>
                                     {menuOptions.map((option) => (
@@ -147,9 +179,11 @@ export const Navbar = () => {
                                                     as={Button}
                                                     variant="link"
                                                     width="full"
-                                                    color={colorText}
-                                                    _hover={{ color: 'orange.400' }}
                                                     style={{ textTransform: 'uppercase' }}
+                                                    color={colorText}
+                                                    py={'0.6rem'}
+                                                    px={'1rem'}
+                                                    _hover={{ boxShadow: boxShadow }}
                                                 >
                                                     {option.label}
                                                 </MenuButton>
@@ -157,10 +191,12 @@ export const Navbar = () => {
                                                     {
                                                         categories.map((category) => (
                                                             <MenuItem
-                                                                color={colorText}
                                                                 key={category.id}
-                                                                _hover={{ color: 'orange.500' }}
+                                                                color={colorText}
+                                                                py={'0.6rem'}
+                                                                px={'1rem'}
                                                                 style={{ textTransform: 'uppercase' }}
+                                                                _hover={{ boxShadow: boxShadow }}
                                                             >
                                                                 <Link to={`/category/${category.slug}`}>{category.name}</Link>
                                                             </MenuItem>
@@ -173,9 +209,11 @@ export const Navbar = () => {
                                                 <Button
                                                     width="full"
                                                     variant="link"
-                                                    color={colorText}
-                                                    _hover={{ color: 'orange.400' }}
                                                     style={{ textTransform: 'uppercase' }}
+                                                    color={colorText}
+                                                    py={'0.6rem'}
+                                                    px={'1rem'}
+                                                    _hover={{ boxShadow: boxShadow }}
                                                 >
                                                     {option.label}
                                                 </Button>
@@ -188,9 +226,9 @@ export const Navbar = () => {
                                 <Button
                                     onClick={toggleColorMode}
                                     variant={'outline'}
-                                    colorScheme='blue'
-                                    borderRadius={'20px'}
                                     width={'40px'}
+                                    borderRadius={'20px'}
+                                    colorScheme='blue'
                                 >
                                     {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
                                 </Button>

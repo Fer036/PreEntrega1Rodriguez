@@ -1,55 +1,46 @@
 import React from "react";
 import {
-    Flex,
     Text,
     VStack,
     Heading,
-    useColorModeValue
+    useColorModeValue,
+    Box
 } from '@chakra-ui/react';
 
 export const HomeBanner = () => {
-    const bgColor = 'rgba(255, 255, 255, 0.1)';
-    const backdropFilter = 'blur(15px)';
-    const borderStyle = '1px solid rgba(255, 255, 255, 0.2)';
-    const textColor = useColorModeValue('white', 'white');
+    const headerColor = useColorModeValue('gray.600', 'white');
+    const lineHeader = useColorModeValue('orange.600', 'blue.700')
+    const textColor = useColorModeValue('blue.700', 'orange.700');
+    const shadowBanner = useColorModeValue('-6px -6px 19px #b3b3b3, 6px 6px 19px #ffffff', '-5px -5px 10px #11151d, 5px 5px 10px #232b3b');
+    const bgBanner = useColorModeValue('linear-gradient(315deg, #cacaca, #f0f0f0)', '#1A202C');
 
     return (
-        <Flex
-            mx={'auto'}
-            my={'4rem'}
-            w={'50%'}
+        <Box
+            w={'90%'}
             h={{ base: '15vh', sm: '23vh', md: '27vh' }}
-            borderRadius={'20px'}
-            bg={bgColor}
-            backdropFilter={backdropFilter}
-            border={borderStyle}
-            boxShadow={'0 4px 30px rgba(0, 0, 0, 0.1)'}
-            alignItems="center"
+            mx={'auto'}
+            my={'2rem'}
+            display={'flex'}
+            alignItems={'center'}
             justifyContent={'center'}
-            p={5}
-            backgroundImage={`url('https://images.unsplash.com/photo-1542831371-d531d36971e6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')`}
-            backgroundSize="cover"
-            backgroundPosition="center"
+            boxShadow={shadowBanner}
+            borderRadius={'20px'}
+            bg={bgBanner}
         >
-            <VStack
-                alignItems="center"
-                spacing={2}
-                textAlign="center"
-            >
-                {/* Título */}
+            <VStack>
                 <Heading
                     lineHeight={1.1}
-                    fontSize={{ base: '1rem', sm: '2rem', lg: '4rem', xl: '5rem' }}
-                    color={textColor}
                 >
                     <Text
                         as={'span'}
+                        fontSize={{ base: '2rem', sm: '3.1rem', lg: '4rem', xl: '5rem' }}
+                        color={headerColor}
                         position={'relative'}
-                        zIndex={1}
-                        whiteSpace="normal"
-                        wordBreak="break-word"
-                        overflow="hidden"
-                        textOverflow="ellipsis"
+                        zIndex={0}
+                        whiteSpace={'normal'}
+                        wordBreak={'break-word'}
+                        overflow={'hidden'}
+                        textOverflow={'ellipsis'}
                         fontWeight={900}
                         _after={{
                             content: "''",
@@ -58,14 +49,22 @@ export const HomeBanner = () => {
                             position: 'absolute',
                             bottom: 1,
                             left: 0,
-                            bg: 'blue.700',
+                            bg: lineHeader,
                             zIndex: -1,
                         }}
                     >
-                        GeekStore
+                        GeekStore.
+                    </Text>
+                    <Text
+                        my={'1rem'}
+                        color={textColor}
+                        fontSize={{ base: '1rem', sm: '1.5rem', lg: '1.77rem', xl: '2rem' }}
+                        fontWeight={900}
+                    >
+                        Encontrá todo para tu setup.
                     </Text>
                 </Heading>
             </VStack>
-        </Flex>
+        </Box>
     );
 };

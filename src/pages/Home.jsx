@@ -3,6 +3,7 @@ import { Box, Flex, Spinner } from '@chakra-ui/react';
 import { useItemsCollection } from '../hooks/useItemsCollection';
 import { ItemListContainer } from '../components';
 import { HomeBanner } from '../components/HomeBanner/HomeBanner';
+import { FeatureProducts } from '../components/FeatureProducts/FeatureProducts';
 
 export const Home = () => {
     const { items, loading, error } = useItemsCollection('products');
@@ -23,6 +24,7 @@ export const Home = () => {
     ) : (
         <Box>
             <HomeBanner />
+            <FeatureProducts />
             <ItemListContainer products={items} />
         </Box>
     );
