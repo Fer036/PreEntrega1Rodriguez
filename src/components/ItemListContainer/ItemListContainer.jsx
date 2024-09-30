@@ -1,7 +1,6 @@
 import React from 'react';
 
 import {
-    Box,
     Card,
     CardBody,
     Image,
@@ -21,6 +20,17 @@ export const ItemListContainer = ({ products }) => {
     const shadowItem = useColorModeValue('-6px -6px 19px #b3b3b3, 6px 6px 19px #ffffff', '-5px -5px 10px #11151d, 5px 5px 10px #232b3b');
     const bgItemList = useColorModeValue('linear-gradient(315deg, #cacaca, #f0f0f0)', '#1A202C');
     const colorText = useColorModeValue('blue.700', 'orange.700')
+
+    const initialVisibleProducts = 12;
+    const [visibleProducts, setVisibleProducts] = React.useState(initialVisibleProducts);
+    
+    const handleShowMore = () => {
+        setVisibleProducts(products.length);
+    };
+
+    const handleShowLess = () => {
+        setVisibleProducts(initialVisibleProducts);
+    };
 
     return (
         <Flex
@@ -59,7 +69,7 @@ export const ItemListContainer = ({ products }) => {
                 borderRadius={'20px'}
             >
 
-                {products.map((product) => (
+                {products.slice(0, visibleProducts).map((product) => (
                     <Card
                         key={product.id}
                         w={'15rem'}
@@ -121,6 +131,31 @@ export const ItemListContainer = ({ products }) => {
                     </Card>
                 ))}
             </Flex>
+            {visibleProducts < products.length && (
+                <Button
+                    onClick={handleShowMore}
+                    w={'10rem'}
+                    m={'2rem auto'}
+                    bg={bgItemList}
+                    color={colorText}
+                    boxShadow={shadowItem}
+                >
+                    Ver más
+                </Button>
+            )}
+
+            {visibleProducts === products.length && (
+                <Button
+                    onClick={handleShowLess}
+                    w={'10rem'}
+                    m={'2rem auto'}
+                    bg={bgItemList}
+                    color={colorText}
+                    boxShadow={shadowItem}
+                >
+                    Ver menos
+                </Button>
+            )}
         </Flex>
     );
 };
