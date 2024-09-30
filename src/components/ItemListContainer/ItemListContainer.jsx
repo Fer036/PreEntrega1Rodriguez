@@ -21,7 +21,7 @@ export const ItemListContainer = ({ products }) => {
     const bgItemList = useColorModeValue('linear-gradient(315deg, #cacaca, #f0f0f0)', '#1A202C');
     const colorText = useColorModeValue('blue.700', 'orange.700')
 
-    const initialVisibleProducts = 12;
+    const initialVisibleProducts = 9;
     const [visibleProducts, setVisibleProducts] = React.useState(initialVisibleProducts);
     
     const handleShowMore = () => {
