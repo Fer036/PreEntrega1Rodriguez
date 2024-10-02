@@ -6,3 +6,4 @@ export * from './ItemListContainer';
 export * from './ItemDetailContainer';
 export * from './HomeBanner';
 export * from './FeatureProducts';
+export * from './LoginSignup';

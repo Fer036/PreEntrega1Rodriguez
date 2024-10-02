@@ -4,3 +4,4 @@ export * from './Contact';
 export * from './Category';
 export * from './Checkout';
 export * from './Payment';
+export * from './Login';

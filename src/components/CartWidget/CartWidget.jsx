@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 
 export const CartWidget = () => {
     const { cartState } = useContext(CartContext);
-
     const qtyTotalItems = cartState.reduce((acc, item) => acc + item.qtyItem, 0);
 
     return (

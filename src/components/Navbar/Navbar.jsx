@@ -36,9 +36,9 @@ export const Navbar = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
 
     const menuOptions = [
-        { id: 1, label: 'Inicio', path: '/' },
-        { id: 2, label: 'Productos', path: `/category` },
+        { id: 2, label: 'Categorias', path: `/category` },
         { id: 3, label: 'Contacto', path: '/contact' },
+        { id: 4, label: 'Login', path: '/login' },
     ];
 
     const boxShadow = useColorModeValue('-6px -6px 19px #b3b3b3, 6px 6px 19px #ffffff', '-5px -5px 10px #11151d, 5px 5px 10px #232b3b');
@@ -79,7 +79,7 @@ export const Navbar = () => {
                         alignItems={'center'}
                     >
                         {menuOptions.map((option) => (
-                            option.label === 'Productos' ? (
+                            option.label === 'Categorias' ? (
                                 <Menu key={option.id} isLazy>
                                     <MenuButton
                                         justifyContent={'center'}
@@ -173,7 +173,7 @@ export const Navbar = () => {
                             <DrawerBody>
                                 <Stack direction={'column'} spacing={4}>
                                     {menuOptions.map((option) => (
-                                        option.label === 'Productos' ? (
+                                        option.label === 'Categorias' ? (
                                             <Menu key={option.id} isLazy>
                                                 <MenuButton
                                                     as={Button}
