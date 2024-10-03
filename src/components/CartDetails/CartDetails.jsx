@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext } from 'react';
 import { CartContext } from '../../context';
 
 import {
@@ -15,9 +15,9 @@ import {
     AlertIcon,
     IconButton,
     useColorModeValue,
-} from "@chakra-ui/react";
-import { DeleteIcon, AddIcon, MinusIcon } from "@chakra-ui/icons";
-import { Link } from "react-router-dom";
+} from '@chakra-ui/react';
+import { DeleteIcon, AddIcon, MinusIcon } from '@chakra-ui/icons';
+import { Link } from 'react-router-dom';
 
 export const CartDetails = () => {
     const { cartState, addItem, removeItem, deleteItem } = useContext(CartContext);
@@ -34,7 +34,7 @@ export const CartDetails = () => {
     return (
         <Box
             p={6}
-            w={'80%'}
+            w={'90%'}
             mx={'auto'}
             my={'3rem'}
             borderRadius={'20px'}
@@ -43,18 +43,18 @@ export const CartDetails = () => {
             color={colorText}
         >
             <Heading
-                as={"h2"}
-                size={"lg"}
+                as={'h2'}
+                size={'lg'}
                 mb={6}
-                textAlign={"center"}
+                textAlign={'center'}
             >
                 DETALLES DE TU COMPRA
             </Heading>
 
             {cartState.length === 0 ? (
                 <Alert
-                    status="info"
-                    borderRadius={"20px"}
+                    status='info'
+                    borderRadius={'20px'}
                     bg={bgCartDetail}
                     boxShadow={shadowCartDetail}
                 >
@@ -62,42 +62,53 @@ export const CartDetails = () => {
                     ¡Carrito vacío!
                 </Alert>
             ) : (
-                <VStack spacing={4} align="stretch">
+                <VStack 
+                    spacing={4}
+                    align='stretch'
+                >
                     {cartState.map((item) => (
                         <Flex
                             key={item.id}
-                            p={4}
-                            borderRadius={"20px"}
-                            alignItems={"center"}
+                            p={3}
+                            wrap={'wrap'}
+                            borderRadius={'20px'}
+                            justifyContent={{base: 'center', md: 'center', lg: 'space-around'}}
+                            alignItems={'center'}
                             boxShadow={shadowCartDetail}
                             bg={bgCartDetail}
                         >
                             <Image
                                 src={item.image}
                                 alt={item.name}
-                                boxSize={"100px"}
-                                objectFit={"cover"}
-                                borderRadius={"20px"}
+                                boxSize={'100px'}
+                                objectFit={'cover'}
+                                borderRadius={'20px'}
                                 mr={4}
                                 boxShadow={shadowCartDetail}
                             />
-                            <Box flex={"1"}>
+                            <Box
+                                m={'1rem'}
+                                justifyContent={{base: 'center', md: 'center', lg: 'space-around'}}
+                            >
                                 <Text
-                                    fontSize={"xl"}
-                                    fontWeight={"bold"}
+                                    fontSize={'xl'}
+                                    fontWeight={'bold'}
                                 >
                                     {item.name}
                                 </Text>
                                 <HStack
+                                    wrap={'wrap'}
+                                    justifyContent={{base: 'center', sm: 'center', md: 'center', lg: 'space-between'}}
+                                    alignItems={'center'}
                                     spacing={4}
-                                    mt={2}
+                                    mt={1}
                                 >
                                     <Text mx={'1rem'}>Precio: ${item.price.toFixed(2)}</Text>
                                     <HStack>
                                         <IconButton
-                                            aria-label="Disminuir cantidad"
+                                            aria-label='Disminuir cantidad'
                                             icon={<MinusIcon />}
-                                            size={"sm"}
+                                            size={'sm'}
                                             onClick={() => removeItem(item)}
                                             isDisabled={item.qtyItem === 1}
                                             bg={bgCartDetail}
@@ -107,9 +118,9 @@ export const CartDetails = () => {
                                             {item.qtyItem}
                                         </Text>
                                         <IconButton
-                                            aria-label="Aumentar cantidad"
+                                            aria-label='Aumentar cantidad'
                                             icon={<AddIcon />}
-                                            size={"sm"}
+                                            size={'sm'}
                                             onClick={() => addItem(item)}
                                             isDisabled={item.qtyItem >= item.stock}
                                             bg={bgCartDetail}
@@ -119,16 +130,20 @@ export const CartDetails = () => {
                                 </HStack>
                             </Box>
                             <Spacer />
-                            <HStack>
+                            <HStack 
+                                m={'1rem'}
+                                wrap={'wrap'}
+                                justifyContent={{base: 'center', md: 'center', lg: 'space-between'}}
+                            >
                                 <Text
                                     my={'auto'}
-                                    fontWeight={"bold"}
+                                    fontWeight={'bold'}
                                     mx={'1rem'}
                                 >
                                     Subtotal: ${(item.price * item.qtyItem).toFixed(2)}
                                 </Text>
                                 <IconButton
-                                    aria-label="Eliminar producto"
+                                    aria-label='Eliminar producto'
                                     icon={<DeleteIcon />}
                                     bg={bgCartDetail}
                                     boxShadow={shadowCartDetail}
@@ -139,10 +154,14 @@ export const CartDetails = () => {
                         </Flex>
                     ))}
                     <Divider />
-                    <Flex alignItems="center">
+                    <Flex 
+                        alignItems='center'
+                        wrap={'wrap'}
+                        justifyContent={{base: 'center', sm: 'center', md: 'center', lg: 'start'}}
+                    >
                         <Text
-                            fontSize="2xl"
-                            fontWeight="bold"
+                            fontSize='2xl'
+                            fontWeight='bold'
                             color={'blue.700'}
                         >
                             Total: ${total.toFixed(2)}
@@ -155,7 +174,7 @@ export const CartDetails = () => {
                             px={'1.2rem'}
                             borderRadius={'20px'}
                         >
-                            <Link to="/payment">
+                            <Link to='/payment'>
                                 PAGAR
                             </Link>
                         </Box>

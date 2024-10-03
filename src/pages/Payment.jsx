@@ -18,7 +18,7 @@ import {
     AlertIcon
 } from "@chakra-ui/react";
 import { CartContext } from '../context';
-import { db } from '../firebase';
+import { db, auth } from '../firebase';
 import { collection, addDoc } from 'firebase/firestore';
 import { BsCash, BsFillCreditCard2FrontFill } from "react-icons/bs";
 
@@ -38,29 +38,43 @@ export const Payment = () => {
     const bgPayment = useColorModeValue('linear-gradient(315deg, #cacaca, #f0f0f0)', '#1A202C');
     const colorText = useColorModeValue('gray.500', 'white');
 
-    const handleCreateOrder = () => {
-        const orderObj = {
-            buyer: {
-                name: name,
-                lastName: lastName,
-                email: email,
-            },
-            items: cartState.map((item) => {
-                return {
+    const handleCreateOrder = async () => {
+        if (!name || !lastName || !email) {
+            alert('Tenés que completar los campos obligatorios');
+            return;
+        };
+
+        try {
+            const user = auth.currentUser;
+            if (!user) {
+                alert('Primero ingresa o registrate para comprar');
+                return;
+            };
+
+            const orderObj = {
+                buyer: {
+                    uid: user.uid,
+                    name: name,
+                    lastName: lastName,
+                    email: email,
+                },
+                items: cartState.map((item) => ({
                     id: item.id,
                     name: item.name,
                     price: item.price,
                     quantity: item.qtyItem,
-                };
-            }),
-            total: total,
-        };
+                })),
+                total: total,
+                date: new Date().toISOString()
+            };
 
-        const ordersCollection = collection(db, 'orders');
-        addDoc(ordersCollection, orderObj).then(({ id }) => {
-            setOrderId(id);
+            const ordersCollection = collection(db, 'orders');
+            const docRef = await addDoc(ordersCollection, orderObj);
+            setOrderId(docRef.id);
             setOrderSuccess(true);
-        });
+        } catch (error) {
+            alert('No se pudo crear la orden', error);
+        }
     };
 
     return (
@@ -92,6 +106,7 @@ export const Payment = () => {
                     Pago
                 </Heading>
             </Box>
+
             {!orderSuccess ? (
                 <Box
                     w={'90%'}
@@ -101,76 +116,33 @@ export const Payment = () => {
                     shadow={shadowPayment}
                     borderRadius={'20px'}
                 >
-                    <FormControl
-                        isRequired
-                        id="username"
-                        mb={'1rem'}
-                    >
-                        <FormLabel
-                            color={'orange.600'}
-                            fontWeight={'900'}
-                            fontSize={'clamp(0.1rem, 1vw + 0.2rem, 2rem)'}
-                        >
+                    <FormControl isRequired id="username" mb={'1rem'}>
+                        <FormLabel color={'orange.600'} fontWeight={'900'} fontSize={'clamp(0.1rem, 1vw + 0.2rem, 2rem)'}>
                             Nombre:
                         </FormLabel>
-                        <Input
-                            type="text"
-                            placeholder="Nombre"
-                            onChange={(e) => setName(e.target.value)}
-                        />
+                        <Input type="text" placeholder="Nombre" onChange={(e) => setName(e.target.value)} />
                     </FormControl>
-                    <FormControl
-                        isRequired
-                        id="lastname"
-                        mb={'1rem'}
-                    >
-                        <FormLabel
-                            color={'orange.600'}
-                            fontWeight={'900'}
-                            fontSize={'clamp(0.1rem, 1vw + 0.2rem, 2rem)'}
-                        >
+
+                    <FormControl isRequired id="lastname" mb={'1rem'}>
+                        <FormLabel color={'orange.600'} fontWeight={'900'} fontSize={'clamp(0.1rem, 1vw + 0.2rem, 2rem)'}>
                             Apellido:
                         </FormLabel>
-                        <Input
-                            type="text"
-                            placeholder="Apellido"
-                            onChange={(e) => setLastName(e.target.value)}
-                        />
+                        <Input type="text" placeholder="Apellido" onChange={(e) => setLastName(e.target.value)} />
                     </FormControl>
-                    <FormControl
-                        isRequired
-                        id="email"
-                        mb={'1rem'}
-                    >
-                        <FormLabel
-                            color={'orange.600'}
-                            fontWeight={'900'}
-                            fontSize={'clamp(0.1rem, 1vw + 0.2rem, 2rem)'}
-                        >
+
+                    <FormControl isRequired id="email" mb={'1rem'}>
+                        <FormLabel color={'orange.600'} fontWeight={'900'} fontSize={'clamp(0.1rem, 1vw + 0.2rem, 2rem)'}>
                             Email:
                         </FormLabel>
-                        <Input
-                            type="email"
-                            placeholder="Correo electronico"
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
+                        <Input type="email" placeholder="Correo electronico" onChange={(e) => setEmail(e.target.value)} />
                     </FormControl>
-                    <FormControl
-                        isRequired
-                        as={'fieldset'}
-                    >
-                        <FormLabel
-                            color={'orange.600'}
-                            fontWeight={'900'}
-                            fontSize={'clamp(0.1rem, 1vw + 0.2rem, 2rem)'}
-                        >
+
+                    <FormControl isRequired as={'fieldset'}>
+                        <FormLabel color={'orange.600'} fontWeight={'900'} fontSize={'clamp(0.1rem, 1vw + 0.2rem, 2rem)'}>
                             Medio de pago:
                         </FormLabel>
                         <RadioGroup defaultValue="creditCard" my={'1rem'}>
-                            <HStack
-                                spacing={6}
-                                align={'center'}
-                            >
+                            <HStack spacing={6} align={'center'}>
                                 <Radio value="creditCard">
                                     < BsFillCreditCard2FrontFill
                                         style={{
@@ -183,12 +155,13 @@ export const Payment = () => {
                                     Tarjeta de Crédito
                                 </Radio>
                                 <Radio value="cash">
-                                    <BsCash style={{
-                                        display: 'inline',
-                                        marginLeft: '0.4rem',
-                                        marginRight: '0.6rem',
-                                        fontSize: '1.5rem'
-                                    }}
+                                    <BsCash
+                                        style={{
+                                            display: 'inline',
+                                            marginLeft: '0.4rem',
+                                            marginRight: '0.6rem',
+                                            fontSize: '1.5rem'
+                                        }}
                                     />
                                     Efectivo
                                 </Radio>
@@ -218,6 +191,7 @@ export const Payment = () => {
                     </AlertDescription>
                 </Alert>
             )}
+
             {!orderSuccess && (
                 <Button
                     mt={'1rem'}
@@ -230,6 +204,7 @@ export const Payment = () => {
                     CONFIRMAR COMPRA
                 </Button>
             )}
+
             <Box>
                 <Text mt={'2rem'}>
                     * Al llenar este formulario, está de acuerdo con nuestros términos y condiciones.

@@ -60,10 +60,10 @@ export const FeatureProducts = () => {
     return (
         <Flex
             w={'90%'}
-            h={{ base: '30vh', sm: '38vh', md: '45vh', lg: '56vh', xl: '60vh' }}
+            h={{ base: '35vh', sm: '45vh', md: '45vh', lg: '56vh', xl: '68vh' }}
             mx={'auto'}
             my={'3rem'}
-            px={'2rem'}
+            px={'1rem'}
             pb={'2rem'}
             bg={bgCarousel}
             flexDir={'column'}
@@ -91,7 +91,7 @@ export const FeatureProducts = () => {
             >
                 <Flex
                     pos={'relative'}
-                    h={{ base: '17vh', sm: '26vh', md: '33vh', lg: '40vh', xl: '50vh' }}
+                    h={{ base: '25vh', sm: '26vh', md: '33vh', lg: '40vh', xl: '50vh' }}
                     w={'full'}
                     {...carouselStyle}
                 >

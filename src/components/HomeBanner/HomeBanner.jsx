@@ -17,7 +17,7 @@ export const HomeBanner = () => {
     return (
         <Box
             w={'90%'}
-            h={{ base: '15vh', sm: '23vh', md: '27vh' }}
+            h={{ base: '13vh', sm: '17vh', md: '25vh' }}
             mx={'auto'}
             my={'2rem'}
             display={'flex'}
@@ -33,7 +33,7 @@ export const HomeBanner = () => {
                 >
                     <Text
                         as={'span'}
-                        fontSize={{ base: '2rem', sm: '3.1rem', lg: '4rem', xl: '5rem' }}
+                        fontSize={'clamp(2rem, 5.5vw, 9rem)'}
                         color={headerColor}
                         position={'relative'}
                         zIndex={0}
@@ -58,7 +58,7 @@ export const HomeBanner = () => {
                     <Text
                         my={'1rem'}
                         color={textColor}
-                        fontSize={{ base: '1rem', sm: '1.5rem', lg: '1.77rem', xl: '2rem' }}
+                        fontSize={'clamp(1rem, 2vw, 4rem)'}
                         fontWeight={900}
                     >
                         Encontrá todo para tu setup.

@@ -30,7 +30,7 @@ export const ItemDetailContainer = ({ product }) => {
             const newCount = count + 1;
             setCount(newCount);
             addItem(product, newCount);
-        }
+        };
     };
 
     const handleDecrement = () => {
@@ -38,7 +38,7 @@ export const ItemDetailContainer = ({ product }) => {
             const newCount = count - 1;
             setCount(newCount);
             removeItem(product);
-        }
+        };
     };
 
     if (!product) {
@@ -130,16 +130,21 @@ export const ItemDetailContainer = ({ product }) => {
                                 bg={bgItemDetail}
                                 shadow={shadowItemDetail}
                             >
-                                - 
+                                -
                             </Button>
-                            <Text my={'auto'} fontSize={'1.2rem'}>{count}</Text>
+                            <Text
+                                my={'auto'}
+                                fontSize={'1.2rem'}
+                            >
+                                {count}
+                            </Text>
 
-                            <Button 
+                            <Button
                                 onClick={handleIncrement}
                                 bg={bgItemDetail}
                                 boxShadow={shadowItemDetail}
                             >
-                                    +
+                                +
                             </Button>
                         </Stack>
                     )}

@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
-import { auth } from '../../firebase';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect } from 'react';
+import { auth, db } from '../../firebase';
+import { doc, setDoc } from 'firebase/firestore';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 import {
     Alert,
     AlertIcon,
@@ -57,11 +58,16 @@ export const LoginSignup = () => {
 
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
+            await setDoc(doc(db, 'users', user.uid), {
+                username: username,
+                email: user.email
+            });
             setError('');
-            setActiveUser(userCredential.user.email);
+            setActiveUser(user.email);
         } catch (error) {
             setError(`Ocurrió un error: ${error.message}`);
-        }
+        };
     };
 
     const handleLogin = async () => {
@@ -78,7 +84,7 @@ export const LoginSignup = () => {
         try {
             await signOut(auth);
             setActiveUser(null);
-            navigate('/login');
+            navigate('/');
         } catch (error) {
             setError(`Error al cerrar sesión: ${error.message}`);
         }
@@ -87,7 +93,7 @@ export const LoginSignup = () => {
 
     return (
         <Box
-            w={'50%'}
+            w={'90%'}
             mx={'auto'}
             my={'2rem'}
             p={{ base: '1rem', sm: '1rem', md: '2rem', lg: '4rem' }}
@@ -97,7 +103,7 @@ export const LoginSignup = () => {
         >
             {activeUser ? (
                 <Alert
-                    status="success"
+                    status='success'
                     mb={'1rem'}
                     bg={bgLoginPage}
                     justifyContent={'space-between'}
@@ -106,7 +112,7 @@ export const LoginSignup = () => {
                     fontSize={'clamp(0.2rem, 1vw + 0.3rem, 1rem)'}
                     flexWrap={{ base: 'wrap', sm: 'wrap', md: 'wrap', lg: 'wrap', xl: 'nowrap' }}
                 >
-                    <Flex 
+                    <Flex
                         alignItems={'center'}
                         mr={'1rem'}
                     >
@@ -135,10 +141,10 @@ export const LoginSignup = () => {
                     >
                         {isSignup ? 'Registro' : 'Iniciar sesión'}
                     </Heading>
-                    {error && <Text color="red.500">{error}</Text>}
+                    {error && <Text color='red.500'>{error}</Text>}
 
                     {isSignup && (
-                        <FormControl id="username" isInvalid={!!error}>
+                        <FormControl id='username' isInvalid={!!error}>
                             <FormLabel
                                 color={colorText}
                                 fontSize={'clamp(0.1rem, 1vw + 0.2rem, 1rem)'}
@@ -159,11 +165,11 @@ export const LoginSignup = () => {
                         </FormControl>
                     )}
 
-                    <FormControl id="email" isInvalid={!!error}>
+                    <FormControl id='email' isInvalid={!!error}>
                         <FormLabel color={colorText}>Email:</FormLabel>
                         <Input
-                            type="email"
-                            placeholder="Email"
+                            type='email'
+                            placeholder='Email'
                             value={email}
                             onChange={e => setEmail(e.target.value)}
                             mb={'1rem'}
@@ -174,11 +180,11 @@ export const LoginSignup = () => {
                         />
                     </FormControl>
 
-                    <FormControl id="password" isInvalid={!!error}>
+                    <FormControl id='password' isInvalid={!!error}>
                         <FormLabel color={colorText}>Contraseña:</FormLabel>
                         <Input
-                            type="password"
-                            placeholder="Contraseña"
+                            type='password'
+                            placeholder='Contraseña'
                             value={password}
                             onChange={e => setPassword(e.target.value)}
                             mb={'3rem'}

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
     Flex,
     useClipboard,
@@ -21,7 +21,7 @@ import { BsGithub, BsInstagram, BsLinkedin, BsPerson } from 'react-icons/bs';
 import { MdEmail, MdOutlineEmail } from 'react-icons/md';
 
 export const Contact = () => {
-    const { hasCopied, onCopy } = useClipboard('example@example.com');
+    const { hasCopied, onCopy } = useClipboard('rodriguezfer2811@gmail.com');
 
     const shadowContact = useColorModeValue('-6px -6px 19px #b3b3b3, 6px 6px 19px #ffffff', '-5px -5px 10px #11151d, 5px 5px 10px #232b3b');
     const bgContact = useColorModeValue('linear-gradient(315deg, #cacaca, #f0f0f0)', '#1A202C');
@@ -29,15 +29,15 @@ export const Contact = () => {
 
     return (
         <Flex
-            id="contact"
-            w={'50%'}
-            mx={'auto'}
-            my={'3rem'}
-            bg={bgContact}
-            boxShadow={shadowContact}
-            borderRadius={'20px'}
-            justifyContent={'center'}
-            alignItems={'center'}
+        id='contact'
+        w={'90%'}
+        mx={'auto'}
+        my={'3rem'}
+        bg={bgContact}
+        boxShadow={shadowContact}
+        borderRadius={'20px'}
+        justifyContent={'center'}
+        alignItems={'center'}
         >
             <Box
                 borderRadius={'lg'}
@@ -82,11 +82,11 @@ export const Contact = () => {
                                     />
                                 </Tooltip>
                                 <Box
-                                    as="a"
-                                    href="https://github.com/Fer036"
+                                    as='a'
+                                    href='https://github.com/Fer036'
                                 >
                                     <IconButton
-                                        aria-label="github"
+                                        aria-label='github'
                                         variant={'ghost'}
                                         bg={bgContact}
                                         boxShadow={shadowContact}
@@ -100,13 +100,12 @@ export const Contact = () => {
                                         isRound
                                     />
                                 </Box>
-
                                 <Box
-                                    as="a"
-                                    href="https://www.linkedin.com/in/fernanda-rodriguez036/"
+                                    as='a'
+                                    href='https://www.linkedin.com/in/fernanda-rodriguez036/'
                                 >
                                     <IconButton
-                                        aria-label="linkedin"
+                                        aria-label='linkedin'
                                         variant={'ghost'}
                                         bg={bgContact}
                                         boxShadow={shadowContact}
@@ -120,11 +119,11 @@ export const Contact = () => {
                                     />
                                 </Box>
                                 <Box
-                                    as="a"
-                                    href="https://www.instagram.com/mfer.rod/"
+                                    as='a'
+                                    href='https://www.instagram.com/mfer.rod/'
                                 >
                                     <IconButton
-                                        aria-label="instagram"
+                                        aria-label='instagram'
                                         variant={'ghost'}
                                         bg={bgContact}
                                         boxShadow={shadowContact}
@@ -139,13 +138,16 @@ export const Contact = () => {
                                 </Box>
                             </Stack>
                             <Box
+                                w={'90%'}
                                 bg={bgContact}
                                 borderRadius={'20px'}
                                 p={8}
                                 color={colorText}
                                 boxShadow={shadowContact}
                             >
-                                <VStack spacing={5}>
+                                <VStack 
+                                    spacing={5}
+                                >
                                     <FormControl isRequired>
                                         <FormLabel>Nombre:</FormLabel>
                                         <InputGroup>
@@ -194,7 +196,6 @@ export const Contact = () => {
                                         Enviar
                                     </Button>
                                 </VStack>
-
                             </Box>
                         </Stack>
                     </VStack>

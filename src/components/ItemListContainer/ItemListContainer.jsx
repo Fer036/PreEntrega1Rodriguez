@@ -19,7 +19,7 @@ import { Link } from 'react-router-dom';
 export const ItemListContainer = ({ products }) => {
     const shadowItem = useColorModeValue('-6px -6px 19px #b3b3b3, 6px 6px 19px #ffffff', '-5px -5px 10px #11151d, 5px 5px 10px #232b3b');
     const bgItemList = useColorModeValue('linear-gradient(315deg, #cacaca, #f0f0f0)', '#1A202C');
-    const colorText = useColorModeValue('blue.700', 'orange.700')
+    const colorText = useColorModeValue('blue.700', 'orange.700');
 
     const initialVisibleProducts = 9;
     const [visibleProducts, setVisibleProducts] = React.useState(initialVisibleProducts);
