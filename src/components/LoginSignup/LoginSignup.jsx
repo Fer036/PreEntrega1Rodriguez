@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { auth, db } from '../../firebase';
 import { doc, setDoc } from 'firebase/firestore';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
@@ -28,6 +28,8 @@ export const LoginSignup = () => {
     const [error, setError] = React.useState('');
     const [activeUser, setActiveUser] = React.useState(null);
     const navigate = useNavigate();
+
+    const { clearCart } = useContext(CartContext);
 
     const shadowLoginPage = useColorModeValue('-6px -6px 19px #b3b3b3, 6px 6px 19px #ffffff', '-5px -5px 10px #11151d, 5px 5px 10px #232b3b');
     const bgLoginPage = useColorModeValue('linear-gradient(315deg, #cacaca, #f0f0f0)', '#1A202C');
@@ -86,7 +88,7 @@ export const LoginSignup = () => {
             await signOut(auth);
             setActiveUser(null);
             navigate('/');
-            CartContext.clearCart();
+            clearCart();
         } catch (error) {
             setError(`Error al cerrar sesión: ${error.message}`);
         }

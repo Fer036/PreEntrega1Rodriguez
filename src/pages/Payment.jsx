@@ -29,7 +29,7 @@ export const Payment = () => {
     const [orderSuccess, setOrderSuccess] = useState(false);
     const [orderId, setOrderId] = useState('');
 
-    const { cartState } = useContext(CartContext);
+    const { cartState, clearCart } = useContext(CartContext);
     const total = cartState.reduce(
         (acc, item) => acc + item.price * item.qtyItem, 0
     );
@@ -74,10 +74,10 @@ export const Payment = () => {
             if (docRef.id) {
                 setOrderId(docRef.id);
                 setOrderSuccess(true);
-                CartContext.clearCart();
+                clearCart();
             }
         } catch (error) {
-            alert('No se pudo crear la orden', error);
+            alert(`No se pudo crear la orden. ${error.message}`);
         }
     };
 
