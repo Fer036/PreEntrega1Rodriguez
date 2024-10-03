@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { auth, db } from '../../firebase';
 import { doc, setDoc } from 'firebase/firestore';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
+import { CartContext } from '../../context';
 import { useNavigate } from 'react-router-dom';
 import {
     Alert,
@@ -85,6 +86,7 @@ export const LoginSignup = () => {
             await signOut(auth);
             setActiveUser(null);
             navigate('/');
+            CartContext.clearCart();
         } catch (error) {
             setError(`Error al cerrar sesión: ${error.message}`);
         }

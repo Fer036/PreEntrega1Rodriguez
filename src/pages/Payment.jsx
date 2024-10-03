@@ -70,8 +70,12 @@ export const Payment = () => {
 
             const ordersCollection = collection(db, 'orders');
             const docRef = await addDoc(ordersCollection, orderObj);
-            setOrderId(docRef.id);
-            setOrderSuccess(true);
+
+            if (docRef.id) {
+                setOrderId(docRef.id);
+                setOrderSuccess(true);
+                CartContext.clearCart();
+            }
         } catch (error) {
             alert('No se pudo crear la orden', error);
         }
